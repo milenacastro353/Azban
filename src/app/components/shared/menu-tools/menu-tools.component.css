@@ -1,0 +1,21 @@
+.height-menu-item{
+    height:42px;
+    width: 42px;
+    padding: 8px 8px;
+}
+
+#options{
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}
+.accordion-button::after{
+    margin: auto;
+    transform: rotateZ(100deg);
+}
+
+.buttonOptions{
+    width: 100%;
+}
+

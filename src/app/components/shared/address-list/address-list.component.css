@@ -1,0 +1,59 @@
+#address-list{
+    height: 100x;
+    width: 348px;
+}
+
+#address-list:hover{
+    cursor: pointer;
+}
+
+
+
+#borderList{
+    
+    border-radius: 30px;
+    padding: 50px;
+    width: 450px;
+    align-items: center;
+
+}
+
+#button-margin{
+    margin-top: 20px;
+}
+
+
+.address-selected{
+    background-color: lightgray !important;
+    color:#000;
+}
+
+.delete-address{
+    border: 0;
+    background-color: transparent;
+}
+
+
+.buttonColors{
+    color: #000;
+}
+.buttonColors:hover {
+    color:  #FFAE36 ;
+}
+
+#button1{
+    border: 0;
+    background-color: transparent;
+}
+#button2{
+    background-color: transparent;
+    border:0;
+}
+#button3{
+    background-color: transparent;
+    border:0;
+}
+
+.col-lg-4{
+    padding-left: 32px;
+}

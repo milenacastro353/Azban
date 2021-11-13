@@ -1,0 +1,41 @@
+table{
+    height: 200px;
+    width: 100%;
+    font-size: small;
+}
+
+#center{
+    text-align: center;
+}
+
+th{
+    border: 1px solid;
+}
+
+td{
+    border: 1px solid;
+}
+
+#space{
+    height: 25px;
+}
+
+#button-print{
+    padding:10px;
+}
+.container-to-print{
+    padding: 0%;
+    padding: 0%;
+    width: 50%;
+    display: inline-block;
+}
+
+#print-section{
+    padding-left: 0px;
+    padding-right: 3px;
+    padding-bottom: 3px;
+}
+.delete-address{
+    border: 0;
+    background-color: transparent;
+}

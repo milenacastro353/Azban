@@ -1,0 +1,38 @@
+<form [formGroup]="addressData" > 
+    
+    <div class="border">
+        <button class="delete-form" aria-label='delete item' (click)='closeAddressPopUp()' >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"/>
+            </svg>
+        </button>
+        <h3 id="lineborder1" class="heading">Dirección adicional</h3>
+                    <hr style="height: 2px; margin: 15px;">
+        <div >
+            <label for="address">Destinatario</label>
+            <input type="text" class="form-control" formControlName="addresse"  id="name">
+        </div>
+        <div>
+            <label  for="address">Celular</label>
+            <input type="text" class="form-control" formControlName="phoneAddresse" id="phone" >
+        </div>
+        <div>
+            <label  for="address">Dirección</label>
+            <input type="text" class="form-control" formControlName="address" id="address">
+        </div>
+        <div>
+            <label  for="department">Departamento</label>
+            <select class="form-select" formControlName="department" id="department" >
+                <option value="nv" disabled>Departamento</option>
+                <option *ngFor="let department of DepartmentList; index as i" value="{{department.departmentId}}">{{department.department}}</option>
+            </select>    
+        </div>
+        <div>
+            <label  for="city">Municipio</label>
+            <input type="text" class="form-control" formControlName="city" id="city">
+        </div>
+        <div class="margin-top">
+            <input class="buttonColors btn" (click)="addAddress()" type="submit" value="Guardar">
+        </div>
+    </div>
+</form>

@@ -1,0 +1,14 @@
+.bi-check2-square{
+    color: rgb(82, 231, 82);
+    margin: auto;
+}
+.modal-body{
+    text-align: center;
+}
+.modal-footer{
+    margin: auto;
+}
+
+.modal-dialog{
+    width: 100%;
+}

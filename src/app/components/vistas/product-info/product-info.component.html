@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-lg-1 col-md-1 col-sm-hidden">
+    </div>
+    <div class="col-lg-10 col-md-10 col-sm-12">
+        <div *ngFor="let dataCard of ProductsData; index as i" class="card border-secondary mb-3 horizontal"  style="max-width: 18rem;">
+            <div class="btn-group dropend">
+                <button [style.background-color]="dataCard.color.index" type="button"  class="btn btn-secondary">
+                 <strong>{{dataCard.producto}}</strong> 
+                </button>
+                <button [style.background-color]="dataCard.color.index" type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                  <span class="visually-hidden">Toggle Dropright</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" (click)="deleteProduct(i)">Eliminar</a></li>
+                </ul>
+            </div>
+            <div  class="card-body text-secondary">
+                <h5 class="card-title"></h5>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">    
+                        <p id="lineborder" class="card-text"><span class="textStrong">Gen: </span>{{dataCard.genero}}</p>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <p id="lineborder" class="card-text"><span class="textStrong">Talla: </span>{{dataCard.talla}}</p>
+                    </div>
+                    <div class="col-lg-4 col-md-6">    
+                        <p id="lineborder" class="card-text"><span class="textStrong">Cant: </span>{{dataCard.cantidad}}</p>
+                    </div>
+                </div>
+                <hr style="height: 1px; margin: 2px;">
+                <p id="lineborder" class="card-text"><span class="textStrong">Estamp: </span>{{dataCard.estampado}}</p>
+                <hr style="height: 1px; margin: 2px;">
+                <p id="lineborder" class="card-text"><span class="textStrong">Estamp 2: </span>{{dataCard.estampadoSecundario}}</p>
+                <hr style="height: 1px; margin: 2px;">
+                <p id="lineborder" class="card-text"><span class="textStrong">Obs: </span>{{dataCard.observaciones}}</p>
+            </div>
+            
+        </div>
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-hidden">
+    </div>
+</div>
+

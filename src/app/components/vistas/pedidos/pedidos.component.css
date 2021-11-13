@@ -1,0 +1,146 @@
+.textStrong{
+    font-weight: 700;
+    font-size: small;
+}
+#card-complete{
+    height: 500px;
+    overflow-y: scroll;
+    padding: 0%;
+}
+#card-complete::-webkit-scrollbar {
+    display: none;
+}
+.dataState{
+    margin-bottom: 0px;
+    
+}
+
+.padding-0{
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-align: center;
+    height: 45px;
+}
+
+select {
+    background: transparent;
+    border: none;
+ }
+#orderTitle{
+    font-size: 20px;
+    padding: 10px;
+}
+.borderButton{
+    align-items: right;
+}
+.table{
+    margin-bottom: 0px;
+}
+
+#lookOrder{
+    background: transparent;
+    border: none;
+}
+#lookOrderPadding{
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+#editIcon{
+    margin-right: 8px;
+}
+
+#notPaidIcon{
+    color:green;
+    cursor:pointer;
+}
+
+#background-alert { 
+    position: fixed;
+    background-color: rgba(128, 128, 128, 0.3);
+    z-index: 3;
+    height: 100%;
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    }
+    
+#container-alert{
+    position:absolute;
+    background-color: white;
+    margin-top: 40px;
+    border-radius: 30px;
+    min-width: 300px;
+}
+
+#background-print{
+    position: fixed;
+    background-color: rgba(128, 128, 128, 0.3);
+    z-index: 3;
+    height: 100%;
+    width: 100%;
+    display:flex;
+    justify-content: center;
+}
+
+#container-print{
+    background-color: white;
+    width: 80%;
+    padding: 50px;
+    overflow-y: scroll;
+}
+#container-print::-webkit-scrollbar {
+    display: none;
+}
+
+#borderOrder{
+    border-radius: 5px;
+}
+
+#card-complete{
+    border: 0px;
+}
+
+#borderState{
+    border: solid 1px lightgray;
+    margin: 5px;
+}
+
+.table{
+    border-bottom: 0px;
+}
+
+.buttonColors:hover{
+    background-color: #000000;
+    color: #FFFFFF;
+}
+.buttonColors {
+background-color: #FFAE36 ;
+color: #000000;
+}
+
+.padding-top-bottom{
+padding-top: 10px;
+padding-bottom: 10px;
+}
+
+
+.color-red{
+    background-color: #FADBD8;
+    color:#E74C3C;
+}
+.color-yellow{
+    background-color: #FDEBD0 ;
+    color:#F39C12;
+}
+.color-green{
+    background-color: #D5F5E3;
+    color:#27AE60;
+
+}
+.spaceColorState{
+    width: 100px;
+    height: 30px;
+    border-radius:100px;
+    padding: 5px;
+}

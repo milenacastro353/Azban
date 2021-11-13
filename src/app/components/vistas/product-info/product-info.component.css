@@ -1,0 +1,75 @@
+.horizontal {
+    display: inline-flex;
+    justify-content: center;
+    margin-right: 10px;
+    margin-top: 10px;
+    width: 16rem;
+  }
+
+.bg-azban-amarillo-mostaza{
+background-color: #F1C40F !important;
+}
+
+.bg-azban-azul-oscuro{
+background-color: #34495E !important;
+}
+
+.bg-azban-azul-rey{
+background-color: #2471A3 !important;
+}
+
+.bg-azban-rojo{
+background-color: #df0505 !important;
+}
+
+.bg-azban-vinotinto{
+background-color: #922B21 !important;
+}
+
+.bg-azban-lila{
+background-color: #D7BDE2 !important;
+}
+
+.bg-azban-rosado{
+background-color:#F1948A !important ;
+}
+
+.bg-azban-palo-de-rosa{
+background-color: #E59866 !important;
+}
+
+.bg-azban-verde-menta{
+background-color: #82E0AA !important;
+}
+
+.bg-azban-gris-claro{
+background-color: #BFC9CA !important;
+}
+
+.bg-azban-gris-oscuro{
+background-color: #797D7F !important;
+}
+
+.bg-azban-beige{
+background-color: beige !important;
+}
+
+.bg-azban-negro{
+background-color: black !important;
+}
+
+.bg-azban-blanco{
+background-color: white !important;
+}
+
+.textStrong{
+  font-weight: 700;
+}
+
+.card-body{
+  font-size: small;
+}
+    
+.card-text{
+  margin: 0;
+}

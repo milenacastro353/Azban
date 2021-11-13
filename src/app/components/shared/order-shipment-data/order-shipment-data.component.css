@@ -1,0 +1,39 @@
+#marginCheck{
+    margin: 5px;
+}
+
+.card{
+    margin: 5px;
+    
+}
+#card-to-scroll{
+    overflow-y: scroll;
+    height: 500px;
+}
+#card-to-scroll::-webkit-scrollbar{
+    display: none;
+}
+p{
+    margin-bottom: 0px;
+}
+#iconPrint{
+    margin-left: 20px;
+}
+
+#checkboxNoLabel{
+    width: 30px;
+    height: 30px;
+    margin-top: 0px;
+}
+
+#border-button{
+    border-radius: 100%;
+}
+
+
+#check-to-print{
+    padding-left: 50px!important;
+}
+.card-body{
+    padding:15px;
+}

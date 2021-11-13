@@ -1,0 +1,68 @@
+<div id="button-print">
+    <div class="row">
+        <div class="col-6">
+            <button class="delete-address"  (click)="closePreview()" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                    <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"/>
+                </svg>
+            </button>
+        </div>
+        <div class="col-6">
+            <button type="button" [useExistingCss]="true" class="btn btn-outline-primary" (click)="closePreview()" printSectionId="print-section" ngxPrint>
+                Imprimir
+            </button>
+        </div>
+    </div>
+</div>
+<div id="print-section" class="row">
+    <div class="col-12">
+        <div class="container container-to-print" *ngFor="let data of PrintData; index as i">
+            <table>
+                <thead>
+                    <tr>
+                        <th rowspan="2"></th>
+                        <th id="center">Fredy Guio Peña C.C.1.026.284.779</th>
+                    </tr>
+                    <tr>
+                        <th id="center">Celular 350 204 7721</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th id="center" colspan="2">DESTINATRIO</th>
+                    </tr>
+                    <tr>
+                        <th>Nombre:</th>
+                        <td>{{data.customer}}</td>
+                    </tr>
+                    <tr>
+                        <th>Cédula:</th>
+                        <td>{{data.documentInitial}} {{data.documentNumber}}</td>
+                    </tr>
+                    <tr>
+                        <th>Celular:</th>
+                        <td>{{data.phone}}</td>
+                    </tr>
+                    <tr>
+                        <th>Ciudad:</th>
+                        <td>{{data.city}}</td>
+                    </tr>
+                    <tr>
+                        <th rowspan="2">Dirección:</th>
+                        <td>{{data.department}} </td>
+                    </tr>
+                    <tr>
+                        <td>{{data.address}}</td>
+                    </tr>
+                    <tr>
+                        <th id="center" colspan="2">DESCRIPCIÓN PRODUCTO</th>
+                    </tr>
+                    <tr>
+                        <td id="space" colspan="2"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,14 @@
+.navbar-brand{
+    padding-left:50px;
+    color:white;
+    cursor: default;
+}
+
+.padding-right{
+    padding-right: 0%;
+}
+
+.navbar{
+    background-color: #000;
+ 
+}

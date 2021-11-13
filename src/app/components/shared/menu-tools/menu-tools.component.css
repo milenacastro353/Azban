@@ -2,6 +2,7 @@
     height:42px;
     width: 42px;
     padding: 8px 8px;
+    color: white;
 }
 
 #options{
@@ -15,7 +16,28 @@
     transform: rotateZ(100deg);
 }
 
-.buttonOptions{
-    width: 100%;
+
+#menuOptions{
+    color:white;
+}
+
+#buttonOpen{
+    color:white;
+}
+
+#buttonClose{
+    color: white;
+}
+
+.bg-items{
+    background-color: #2B2E34;
+    color: white;
+    border-top: solid 1px lightgrey;
+    border-bottom: solid 1px lightgrey;
+}
+.bg-items:hover{
+    background-color: #434447;
+    color: white;
+    border-bottom: solid 1px lightgrey;
 }
 

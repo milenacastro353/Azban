@@ -11,7 +11,6 @@ export class MenuToolsComponent implements OnInit {
   classIcon : string ='';
   classMenuItem : string ='';
   menuCollapsed : boolean = false;
-  classMenuTitle : string = '';
   titleCollapsed : string = 'show';
   showIcon1: boolean = true;
   showIcon2: boolean = false;
@@ -21,7 +20,6 @@ export class MenuToolsComponent implements OnInit {
   ngOnInit(): void {
     this.classMenuItem = 'd-none';
     this.titleCollapsed = 'd-none';
-    this.classMenuTitle = 'col-1';
   }
   
   CollapseItem(){
@@ -29,7 +27,6 @@ export class MenuToolsComponent implements OnInit {
     if (this.classIcon =='col-2'){
       this.classMenuItem='d-none';
       this.classIcon ='col-12';
-      this.classMenuTitle='col-2';
       this.titleCollapsed='d-none';
       this.showIcon2 = false;
       this.showIcon1 = true;
@@ -37,7 +34,6 @@ export class MenuToolsComponent implements OnInit {
     else {
       this.classIcon= 'col-2';
       this.classMenuItem='col-10';
-      this.classMenuTitle='col-12';
       this.titleCollapsed='show';
       this.showIcon2 = true;
       this.showIcon1 = false;

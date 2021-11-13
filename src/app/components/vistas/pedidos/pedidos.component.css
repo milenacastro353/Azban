@@ -3,7 +3,6 @@
     font-size: small;
 }
 #card-complete{
-    height: 500px;
     overflow-y: scroll;
     padding: 0%;
 }
@@ -32,9 +31,11 @@ select {
 }
 .borderButton{
     align-items: right;
+    margin-right: 5px;
 }
 .table{
     margin-bottom: 0px;
+    color: white;
 }
 
 #lookOrder{
@@ -51,7 +52,7 @@ select {
 }
 
 #notPaidIcon{
-    color:green;
+    color:#11C777 ;
     cursor:pointer;
 }
 
@@ -99,11 +100,15 @@ select {
 
 #card-complete{
     border: 0px;
+    background-color: #2B2E34;
 }
 
 #borderState{
     border: solid 1px lightgray;
+    border-radius: 5px;
     margin: 5px;
+    background-color: #2B2E34;
+    color: white;
 }
 
 .table{
@@ -111,12 +116,12 @@ select {
 }
 
 .buttonColors:hover{
-    background-color: #000000;
+    background-color: #FF4F4F;
     color: #FFFFFF;
 }
 .buttonColors {
-background-color: #FFAE36 ;
-color: #000000;
+background-color: #F92438 ;
+color: white;
 }
 
 .padding-top-bottom{
@@ -143,4 +148,32 @@ padding-bottom: 10px;
     height: 30px;
     border-radius:100px;
     padding: 5px;
+}
+
+header{
+    color: white;
+}
+
+#borderIcons{
+    text-align: right;
+    padding-top: 7px;
+}
+
+#stateProduction{
+    font-weight: bold ;
+    color: white;
+}
+option{
+    background-color: #2B2E34;
+}
+
+#eyeOpened{
+    color: white;
+}
+#eyeClosed{
+    color: white;
+}
+
+.menu-tools{
+    margin-top: 30px;
 }

@@ -1,10 +1,9 @@
 #lineborder1{
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   margin: 0;
-  padding: 10px;
+  padding: 5px;
   text-align: center;
-  background-color: #000;
-  color:white;
+  background-color: rgb(255, 255, 255);
+  color:rgb(0, 0, 0);
 }
 #hand-header{
   transform: rotate(180deg);
@@ -18,7 +17,7 @@
 }
 
 #color-line{
-  color: yellow;
+  color: white;
 }
 
 .aling-top {
@@ -101,12 +100,15 @@ select.ng-invalid{
   
 
 #replyUserData{
-  border-left: 1px solid lightgrey !important;
+  border: 1px solid lightgrey !important;
   height: 20px;
   width: 20px;
   margin-right: 8px;
 }
 
+input[type=checkbox]:checked{
+  background-color: #11C777;
+}
 
 
 .user-select-auto{
@@ -193,30 +195,75 @@ border-radius: 30px;
 
 
 .buttonColorList{
-  background-color: white;
-}
-.buttonColorList:hover {
-  background-color: #fff45f ;
-  color: #000000;
+  background-color: #2B2E34;
+  color: white;
+  border: solid 1px lightgrey;
 }
 
 .buttonColors{
-  background-color: lightgray;
+  background-color: #F92438;
   color: #FFFFFF;
 }
 .buttonColors:hover {
-  background-color: #fff45f  ;
-  color: #000000;
+  background-color: #FF4F4F ;
+  color: #FFFFFF;
 }
 
+.borderButtonColor{
+  color: #FFFFFF;
+  background-color: #518a71;
+}
+.borderButtonColor:hover{
+  color: #FFFFFF;
+  background-color: #11C777;
+}
+
+.buttonColorsPay{
+  background-color: #11C777;
+  color: #FFFFFF;
+}
+.buttonColorsPay:hover {
+  background-color: #11C777 ;
+  color: #FFFFFF;
+}
+
+
+
 .buttonColorMain{
-  background-color: #FF4F4F;
+  background-color: #F92438;
   color:white;
   width: 100%;
   font-size: x-large;
 }
 
 .buttonColorMain:hover{
-  background-color: #f77070;
+  background-color: #FF4F4F;
 }
 
+select{
+  background-color: #2B2E34;
+  color: white;
+}
+
+
+input{
+  background-color: #2B2E34;
+  color: white;
+}
+
+#bg-form-group{
+  background-color: #2B2E34;
+  color: white;
+  padding: 12px;
+  border-radius: 5px;
+}
+
+:disabled{
+  background-color: #5a5b5c;
+  color: white;
+}
+
+textarea{
+  background-color: #2B2E34;
+  color: white;
+}

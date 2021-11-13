@@ -32,8 +32,8 @@ export class FormComponent implements OnInit {
   disableClientsField: boolean = false;
   disableEdit: boolean = true; 
   addressList: Array<Address> = [];
-  classPago: string= 'btn-outline-warning';
-  classAbono: string= 'btn-outline-warning';
+  classPago: string= 'borderButtonColor';
+  classAbono: string= 'borderButtonColor';
   classCard: string ='';
   bgDropdownColor: string ='';
   serviceClient: GetClientService;
@@ -106,10 +106,10 @@ export class FormComponent implements OnInit {
     this.registerForm.controls.money.disable();
   
     this.serviceClient.getListsTransversal().subscribe((resp: any) => {
-      this.documentList = resp.documentList;
-      this.departmentList = resp.departmentList;
-      this.paymentMethodList = resp.paymentMethodList; 
-      this.contactTypeList = resp.contactTypeList;
+      this.documentList = resp.response.documentTypes;
+      this.departmentList = resp.response.departments;
+      this.paymentMethodList = resp.response.paymentMethods; 
+      this.contactTypeList = resp.response.contactTypes;
     });
 
     this.serviceClient.getProductList().subscribe((resp: any) => {
@@ -157,16 +157,16 @@ export class FormComponent implements OnInit {
     console.log('ingresaBoton 1')
     if (idButton == 1)
     {
-      this.classPago='buttonColors';
-      this.classAbono='btn-outline-warning';
+      this.classPago='buttonColorsPay';
+      this.classAbono='borderButtonColor';
       console.log('ingresaBoton 2')
       this.registerForm.controls.money.disable();
       this.selectedPay = 1;
     }
     else if (idButton == 2)
     {
-      this.classAbono='buttonColors';
-      this.classPago='btn-outline-waringn';
+      this.classAbono='buttonColorsPay';
+      this.classPago='borderButtonColor';
       console.log('ingresaBoton 3')
       this.registerForm.controls.money.enable();
       this.selectedPay = 2;
@@ -184,11 +184,26 @@ export class FormComponent implements OnInit {
   }
     
 
+  resetForm(){
+    let copyDocumentType = this.registerForm.controls.documentType.value;
+    let copyNumberDocument = this.registerForm.controls.document.value;
+    this.registerForm.reset();
+    this.registerForm.controls.documentType.setValue(copyDocumentType);
+    this.registerForm.controls.document.setValue(copyNumberDocument);
+    this.registerForm.controls.department.setValue('nv');
+    this.registerForm.controls.contactType.setValue('nv');
+    this.registerForm.controls.paymentMethod.setValue('nv');
+    this.addressList = [];
+    this.productForm.reset();
+    this.classPago = 'borderButtonColor';
+    this.classAbono = 'borderButtonColor';
+    this.selectedPay = 0;
 
-  buttonSearch(){
-    
-    
-    this.isClientSearched = true;
+    this.enableFields();
+  }
+
+  enableFields()
+  {
     this.registerForm.controls.name.enable();
     this.registerForm.controls.phone.enable();
     this.registerForm.controls.email.enable();
@@ -196,36 +211,45 @@ export class FormComponent implements OnInit {
     this.registerForm.controls.city.enable();
     this.registerForm.controls.address.enable();
     this.registerForm.controls.paymentMethod.enable();
-    this.registerForm.controls.money.enable()
-   
-    
+    this.registerForm.controls.money.enable();
+    this.registerForm.controls.contactType.enable();
+    this.registerForm.controls.contactName.enable();
+  }
+
+
+  buttonSearch(){
+
+    this.enableFields()
+    this.isClientSearched = true;
     this.showform1 = true;
 
     this.serviceClient.getData( this.registerForm.controls.documentType.value , this.registerForm.controls.document.value ).subscribe((resp: any)=>{
       console.log(resp);
-
       
-      this.addressList = [];
+      this.client.name = resp.response.name;
+      this.client.phone = resp.response.phone;
+      this.client.email = resp.response.email;     
+      this.client.contactId = resp.response.idContactType; 
+      this.client.contactName = resp.response.contactValue;
     
-      for (let index = 0; index < resp.addressList.length; index++) {
-        let addAddress = new Address();
-        addAddress.phoneAddresse = resp.addressList[index].phoneAddresse;  
-        addAddress.address = resp.addressList[index].address;
-        addAddress.city = resp.addressList[index].city;
-        addAddress.addresse = resp.addressList[index].addresse;
-        addAddress.department = resp.addressList[index].department;
-        addAddress.idDepartment = resp.addressList[index].departmentId;
-      
-        this.addressList.push(addAddress);
+      if (resp.response.adresses != null)
+      {
+        for (let index = 0; index < resp.response.adresses.length; index++) {
+          let addAddress = new Address();
+          addAddress.address = resp.response.adresses[index].address;
+          addAddress.idDepartment = resp.response.adresses[index].departmentId;
+          addAddress.city = resp.response.adresses[index].city;
+          addAddress.addresse = resp.response.adresses[index].addresse;
+          addAddress.phoneAddresse = resp.response.adresses[index].addressePhone;  
+      //   addAddress.department = resp.response.adresses[index].department;
+        
+          this.addressList.push(addAddress);
+        }
       }
 
-      this.client.phone = resp.phone;
-      this.client.name = resp.fullName;
-      this.client.email = resp.email;     
-      this.client.contactId = resp.contactId; 
-      this.client.contactName = resp.contactName;
+
       
-      if (resp.code == 1 && resp.addressList.length > 0) {
+      if (resp.code == 1 && resp.response.adresses != null) {
         this.showAddressList = true;
         this.registerForm.controls.name.setValue(this.client.name);
         this.registerForm.controls.phone.setValue(this.client.phone);
@@ -241,7 +265,7 @@ export class FormComponent implements OnInit {
         this.registerForm.controls.contactType.disable();
         this.registerForm.controls.contactName.disable();
 
-      } else if (resp.code == 1 && resp.addressList.length == 0 ) {
+      } else if (resp.code == 1 && resp.response.adresses == null ) {
 
         this.registerForm.controls.name.setValue(this.client.name);
         this.registerForm.controls.phone.setValue(this.client.phone);
@@ -255,8 +279,8 @@ export class FormComponent implements OnInit {
         this.registerForm.controls.contactName.disable();
         this.disabledClientAddAddress = true;
         
-      } else if(resp.code == 2){
-        this.disabledClientAddAddress = true;
+      } else if(resp.code == -1){
+        this.resetForm();
       }    
     })
   }

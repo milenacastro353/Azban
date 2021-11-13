@@ -1,15 +1,18 @@
 #marginCheck{
     margin: 5px;
+    text-align: right;
+    background-color: #518a71;
 }
-
+#marginCheck:hover{
+    background-color: #11C777;
+}
 .card{
     margin: 5px;
-    
+    background-color: #2B2E34;
+    color: white; 
+    border-color: lightgrey;
 }
-#card-to-scroll{
-    overflow-y: scroll;
-    height: 500px;
-}
+
 #card-to-scroll::-webkit-scrollbar{
     display: none;
 }

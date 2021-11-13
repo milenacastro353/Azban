@@ -9,7 +9,7 @@ import { Product } from '../models/product';
 })
 export class GetClientService {
   
-  _url = 'http://demo1089139.mockable.io/'
+  _url = 'https://azban-buzos-api.azurewebsites.net/api/'
 
   constructor( private http: HttpClient )
   { 
@@ -19,7 +19,7 @@ export class GetClientService {
   getData(idDocumentType: number , document: string){
     
     let header = new HttpHeaders().set('Type-content', 'aplication/json');
-    let urlGetClient = this._url + 'client/search/' + idDocumentType + '/' + document;
+    let urlGetClient = this._url + 'Client/GetClient/' + idDocumentType + '/' + document;
     
     return this.http.get(urlGetClient, { headers: header });
   }
@@ -33,7 +33,7 @@ export class GetClientService {
 
   getListsTransversal(){
     let header = new HttpHeaders().set('Type-content', 'aplication/json');
-    let urlGetLists = this._url + 'transversal/getLists/' ;
+    let urlGetLists = this._url + 'Transversal/GetLists' ;
     
     return this.http.get(urlGetLists, { headers: header });
   }

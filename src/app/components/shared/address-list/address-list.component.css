@@ -3,6 +3,15 @@
     width: 348px;
 }
 
+#container-list{
+    overflow-y: scroll;
+    max-height: 246px ;
+}
+
+#container-list::-webkit-scrollbar{
+    display: none;
+}
+
 #address-list:hover{
     cursor: pointer;
 }
@@ -15,7 +24,6 @@
     padding: 50px;
     width: 450px;
     align-items: center;
-
 }
 
 #button-margin{

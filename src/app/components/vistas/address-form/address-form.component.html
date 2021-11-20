@@ -24,7 +24,7 @@
             <label  for="department">Departamento</label>
             <select class="form-select" formControlName="department" id="department" >
                 <option value="nv" disabled>Departamento</option>
-                <option *ngFor="let department of DepartmentList; index as i" value="{{department.departmentId}}">{{department.department}}</option>
+                <option *ngFor="let department of DepartmentList; index as i" value="{{department.id}}">{{department.name}}</option>
             </select>    
         </div>
         <div>

@@ -45,9 +45,9 @@ export class AddressFormComponent implements OnInit {
   addAddress(){
     
     this.address.addresse = this.addressData.controls.addresse.value; 
-    this.address.phoneAddresse = this.addressData.controls.phoneAddresse.value; 
+    this.address.addressePhone = this.addressData.controls.phoneAddresse.value; 
     this.address.address = this.addressData.controls.address.value;
-    this.address.department = this.addressData.controls.department.value;
+    this.address.departmentName = this.addressData.controls.department.value;
     this.address.city = this.addressData.controls.city.value;
 
     this.addAddressEvent.emit(this.address)

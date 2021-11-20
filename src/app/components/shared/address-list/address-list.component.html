@@ -1,23 +1,25 @@
-<div id="borderList">    
-    <div *ngFor="let address of AddressData; index as i" class="list-group" id="address-list">
-        <div>  
-            <a [ngClass]="addressSelectedId == i ? 'address-selected' : ''" (click)="selectAddress(i)" id="address-{{i}}" class="list-group-item list-group-item-action flex-column align-items-start">
-            <div class="d-flex w-100 justify-content-between">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 25 25">
-                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
-                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                  </svg>
-                <h5 class="mb-1">{{address.address}}</h5>
-                <button class="delete-address"  (click)="deleteAddress(i)" >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                        <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"/>
-                    </svg>
-                </button>
+<div id="borderList">
+        <div id="container-list">  
+            <div *ngFor="let address of AddressData; index as i" class="list-group" id="address-list">
+                <div>  
+                    <a [ngClass]="addressSelectedId == i ? 'address-selected' : ''" (click)="selectAddress(i)" id="address-{{i}}" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 25 25">
+                            <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+                            <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                        </svg>
+                        <h5 class="mb-1">{{address.address}}</h5>
+                        <button class="delete-address"  (click)="deleteAddress(i)" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <small> <small> {{address.departmentName}} - {{address.city}} - {{address.addresse}} -  {{address.addressePhone}}</small> </small>
+                    </a>
+                </div>  
             </div>
-            <small> <small> {{address.department}} - {{address.city}} - {{address.addresse}} -  {{address.phoneAddresse}}</small> </small>
-            </a>
-        </div>  
-    </div>
+        </div>
     <div id="button-margin">
         <div class="row">
             <div class="col-lg-4 col-md-4">

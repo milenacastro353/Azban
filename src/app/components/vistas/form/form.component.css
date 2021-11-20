@@ -161,6 +161,7 @@ position:absolute;
 background-color: white;
 margin-top: 40px;
 border-radius: 30px;
+max-height: 428px;
 }
 
 #background-pop-up-confirmation{

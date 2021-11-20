@@ -1,38 +1,34 @@
+import { Address } from "./address";
+
 export class Client {
-    idClient: number;
-    name: string;
+    id: number;
     idDocumentType: number;
     document: string;
-    idDepartment: number;
-    city: string;
+    name: string;
+    phone: string;
+    email: string;
+    idContactType: number;
+    contactValue: string;   
     idPaymentMethod: number;
     paid: boolean;
     initialPay: boolean;
     money: number;
-    email: string;
-    phone: string;
-    address:string;
-    contactId: number;
-    contactType: string;
-    contactName: string;
+    address: Array<Address>;
 
     constructor(){
-        this.idClient = 0;
+        this.id = 0;
         this.name = '';
         this.idDocumentType = 0;
         this.document = '';
-        this.idDepartment = 0;
-        this.city = '';
         this.idPaymentMethod = 0;
         this.paid = true;
         this.initialPay = false;
-        this.money = 0;
         this.email = '';
         this.phone = '';
-        this.address = '';
-        this.contactId = 0;
-        this.contactType = '';
-        this.contactName = '';
+        this.idContactType = 0;
+        this.contactValue = '';
+        this.money = 0;
+        this.address = [];
     }
 
 }

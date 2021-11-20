@@ -1,21 +1,19 @@
 export class Address{
-    idAddress: number;
-    addresse: string;
-    phoneAddresse: number;
+    id: number;
     address: string;
-    idDepartment: number;
-    department: string;
-    idCity: number;
+    departmentId: number;    
     city: string;
+    departmentName: string;
+    addresse: string;
+    addressePhone: number;
 
     constructor(){
-        this.idAddress = 0;
+        this.id = 0;
         this.addresse = '';
-        this.phoneAddresse = 0;
+        this.addressePhone = 0;
         this.address = '';
-        this.idDepartment = 0;
-        this.department = '';
-        this.idCity = 0;
+        this.departmentId = 0;
+        this.departmentName = '';
         this.city = '';
     }
 

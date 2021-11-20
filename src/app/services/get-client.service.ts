@@ -55,17 +55,19 @@ export class GetClientService {
     let header = new HttpHeaders().set('Type-content', 'aplication/json');
     let urlGetOrders = this._url + 'order/GetOrders/' ;
     
+    
     return this.http.get(urlGetOrders, { headers: header });
   }
 
-  loginByClient(client : Client){
-    let postClient = this._url + 'login/client';
+  createOrUpdateClient(client : Client){
+    let postClient = this._url + 'Client/CreateOrUpdate';
+
     return this.http.post( postClient, client);
   }  
 
-  loginByAddress( address : Address){
-    let postAddress = this._url + 'login/client/address';
-     console.log(address)
+  addAddressToClient( address : Address , id : number ){
+    let postAddress = this._url + 'Client/AddAddress/' + id
+     
     return this.http.post( postAddress, address );
   }
 

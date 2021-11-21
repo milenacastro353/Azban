@@ -5,6 +5,8 @@ import { Client } from '../../../models/client';
 import { Product } from '../../../models/product';
 import { Address } from '../../../models/address';
 import { GetClientService } from '../../../services/get-client.service';
+import { Order } from 'src/app/models/order';
+import { ProductsOrder } from 'src/app/models/products-to-order';
 
 @Component({
   selector: 'app-form',
@@ -12,7 +14,7 @@ import { GetClientService } from '../../../services/get-client.service';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
-  
+  clientWasEdited: boolean = false;
   showAddressForm: boolean = false;
   isClientSearched: boolean = false;
   isClientSelected: boolean = false;
@@ -48,7 +50,10 @@ export class FormComponent implements OnInit {
   colorBgButton: string ='';
   selectedPay : number = 0;
   code: number = 0;
+  statePaid: boolean = false;
+  stateDeposit: boolean = false;
 
+  addressId = new Address();
 
 
   registerForm = new FormGroup({
@@ -62,14 +67,14 @@ export class FormComponent implements OnInit {
     phone:new FormControl('',[Validators.required,Validators.minLength(7), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
     city: new FormControl('',[Validators.required, Validators.minLength(4)]),
     address: new FormControl('',[Validators.required, Validators.minLength(5)]),
-    money:new FormControl('',[Validators.required,Validators.minLength(4), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
+    deposit:new FormControl('',[Validators.required,Validators.minLength(4), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
     department:new FormControl('nv',[Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
     paymentMethod: new FormControl('nv',[Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
     addresse: new FormControl('', [Validators.required,Validators.maxLength(25), Validators.minLength(10)]),
     phoneAddresse: new FormControl('',[Validators.required,Validators.minLength(7), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
     replyUserData: new FormControl(),
     total: new FormControl('',[Validators.required,Validators.minLength(4), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-    discount: new FormControl
+    discount: new FormControl()
   });
 
   
@@ -105,7 +110,7 @@ export class FormComponent implements OnInit {
     this.registerForm.controls.city.disable();
     this.registerForm.controls.address.disable();
     this.registerForm.controls.paymentMethod.disable();
-    this.registerForm.controls.money.disable();
+    this.registerForm.controls.deposit.disable();
   
     this.serviceClient.getListsTransversal().subscribe((resp: any) => {
       this.documentList = resp.response.documentTypes;
@@ -163,17 +168,24 @@ export class FormComponent implements OnInit {
       this.classPago='buttonColorsPay';
       this.classAbono='borderButtonColor';
       console.log('ingresaBoton 2')
-      this.registerForm.controls.money.disable();
       this.selectedPay = 1;
+      this.registerForm.controls.deposit.disable();
+      this.statePaid = true;
+      this.stateDeposit = false;
     }
     else if (idButton == 2)
     {
       this.classAbono='buttonColorsPay';
       this.classPago='borderButtonColor';
       console.log('ingresaBoton 3')
-      this.registerForm.controls.money.enable();
       this.selectedPay = 2;
+      this.registerForm.controls.deposit.enable();
+      this.statePaid = false;
+      this.stateDeposit = true;
     }
+
+    console.log('Pago ' + this.statePaid);
+    console.log('Abono ' + this.stateDeposit);
   }
 
   setBgDropdownColor(indiceColor: string){
@@ -188,6 +200,7 @@ export class FormComponent implements OnInit {
     
 
   resetForm(){
+    this.clientWasEdited = false;
     let copyDocumentType = this.registerForm.controls.documentType.value;
     let copyNumberDocument = this.registerForm.controls.document.value;
     this.registerForm.reset();
@@ -214,7 +227,7 @@ export class FormComponent implements OnInit {
     this.registerForm.controls.city.enable();
     this.registerForm.controls.address.enable();
     this.registerForm.controls.paymentMethod.enable();
-    this.registerForm.controls.money.enable();
+    this.registerForm.controls.deposit.enable();
     this.registerForm.controls.contactType.enable();
     this.registerForm.controls.contactName.enable();
   }
@@ -227,7 +240,7 @@ export class FormComponent implements OnInit {
     this.registerForm.controls.city.disable();
     this.registerForm.controls.address.disable();
     this.registerForm.controls.paymentMethod.disable();
-    this.registerForm.controls.money.disable();
+    this.registerForm.controls.deposit.disable();
     this.registerForm.controls.addresse.disable();
     this.registerForm.controls.phoneAddresse.disable();
     this.registerForm.controls.total.disable();
@@ -257,6 +270,7 @@ export class FormComponent implements OnInit {
       {
         for (let index = 0; index < resp.response.adresses.length; index++) {
           let addAddress = new Address();
+          addAddress.id = resp.response.adresses[index].id;
           addAddress.address = resp.response.adresses[index].address;
           addAddress.departmentId = resp.response.adresses[index].departmentId;
           addAddress.departmentName = resp.response.adresses[index].departmentName;
@@ -266,6 +280,7 @@ export class FormComponent implements OnInit {
       //   addAddress.department = resp.response.adresses[index].department;
         
           this.addressList.push(addAddress);
+
         }
       }
 
@@ -326,7 +341,7 @@ export class FormComponent implements OnInit {
     this.client.idDocumentType = this.registerForm.controls.documentType.value;
     this.client.document = this.registerForm.controls.document.value;
     this.client.idPaymentMethod = this.registerForm.controls.paymentMethod.value;
-    this.client.money = this.registerForm.controls.money.value;
+    this.client.deposit = this.registerForm.controls.deposit.value;
     this.client.email = this.registerForm.controls.email.value;
     this.client.phone = this.registerForm.controls.phone.value;
   //  this.client.address = this.registerForm.controls.address.value; 
@@ -341,7 +356,11 @@ export class FormComponent implements OnInit {
     address.departmentId = this.registerForm.controls.department.value;
     address.city = this.registerForm.controls.city.value;
 
-   
+    if(this.clientWasEdited){
+      this.client.address = [];
+      this.client.address.push(address);
+    }
+
     if(this.code == -1)
     {
 
@@ -350,23 +369,17 @@ export class FormComponent implements OnInit {
 
         this.serviceClient.addAddressToClient(address, this.client.id).subscribe((resp : any)=>{
           address.id = resp.response.addresses.id;
+          this.addressId.id = address.id
           console.log(this.client.id);    
         });
       }); 
-
-      //cliente nuevo
-      
-      
-    } else if (this.code == 1)
+    } else if (this.code == 1 && this.clientWasEdited)
     {
       this.serviceClient.createOrUpdateClient(this.client).subscribe((resp : any)=>{
         
       }); 
     }
-  
-
-
-
+    console.log('prueba de id direccion' + this.addressId.id)
   }
 
   editClient(){
@@ -379,13 +392,15 @@ export class FormComponent implements OnInit {
     this.registerForm.controls.city.enable();
     this.registerForm.controls.address.enable();
     this.registerForm.controls.paymentMethod.enable();
-    this.registerForm.controls.money.enable();
+    this.registerForm.controls.deposit.enable();
     this.registerForm.controls.contactType.enable();
     this.registerForm.controls.contactName.enable();
     this.registerForm.controls.addresse.enable();
     this.registerForm.controls.phoneAddresse.enable();
     this.disableEdit = true;
     this.isClientSelected= false;
+
+    this.clientWasEdited = true;
   }
   
   asignacion()
@@ -395,16 +410,20 @@ export class FormComponent implements OnInit {
 
   onAddAddress(address: Address){
     this.customerAddress = address;
-    this.registerForm.controls.addresse.setValue(this.customerAddress.addresse);
-    this.registerForm.controls.department.setValue(this.customerAddress.departmentName); 
-    this.registerForm.controls.city.setValue(this.customerAddress.city);
-    this.registerForm.controls.address.setValue(this.customerAddress.address);
-    this.registerForm.controls.phoneAddresse.setValue(this.customerAddress.addressePhone);
     this.showAddressForm = false;
-    
-    console.log(address)
-    this.serviceClient.addAddressToClient(address, this.client.id).subscribe((resp : any)=>{
-      address.id = resp.response.addresses.id;
+
+    console.log("id cliente: " + this.client.id)
+    console.log('direccion adicional' + this.customerAddress.addresse)
+
+    this.serviceClient.addAddressToClient(this.customerAddress, this.client.id).subscribe((resp : any)=>{
+      this.customerAddress.id = resp.response;
+
+      this.registerForm.controls.addresse.setValue(this.customerAddress.addresse);
+      this.registerForm.controls.department.setValue(this.customerAddress.departmentId); 
+      this.registerForm.controls.city.setValue(this.customerAddress.city);
+      this.registerForm.controls.address.setValue(this.customerAddress.address);
+      this.registerForm.controls.phoneAddresse.setValue(this.customerAddress.addressePhone);
+
       console.log(this.client.id);    
     });
   }
@@ -428,6 +447,7 @@ export class FormComponent implements OnInit {
     {
       if (genderId == this.genderList[index].genderId) {
         product.genero = this.genderList[index].gender;
+        product.idGenero = this.genderList[index].genderId;
       }
     }
 
@@ -436,6 +456,7 @@ export class FormComponent implements OnInit {
       if (productId == this.productList[index].productId) {
 
         product.producto = this.productList[index].productName;
+        product.idProducto = this.productList[index].productId
 
         let sizeId = this.productForm.controls.size.value;
 
@@ -444,6 +465,7 @@ export class FormComponent implements OnInit {
           if (sizeId == this.productList[index].sizeList[s].sizeId) {
            
             product.talla = this.productList[index].sizeList[s].sizeName;
+            product.idTalla = this.productList[index].sizeList[s].sizeId;
           }
         }
 
@@ -467,16 +489,16 @@ export class FormComponent implements OnInit {
     this.colorBgButton = '';
     this.colorSelectedId = 0;
     this.showButtonCreate = true;
-    console.log("holiwi 2: " + product.estampado)
+    console.log('Pruba datos card' + this.datosCard)
 
-    this.serviceClient.loginByOrder(product).subscribe((resp : any)=>{
+  /*  this.serviceClient.loginByOrder(product).subscribe((resp : any)=>{
       console.log("holiwi" + product.estampado)
       for (let i = 0; i < this.datosCard.length; i++) {
         this.datosCard[i].idProducto = resp.idProducto
         console.log("El id del producto es:" + this.datosCard[i].idProducto)
       }
       
-    });
+    });*/
 
   }
 
@@ -489,6 +511,8 @@ export class FormComponent implements OnInit {
 
   addAddressSelected(index: number){
     this.selectedAddress = this.addressList[index];
+    this.addressId.id = this.addressList[index].id;
+    console.log( "direccion: id" + this.addressId.id)
   }
 
 
@@ -504,12 +528,46 @@ export class FormComponent implements OnInit {
     this.registerForm.controls.city.setValue(this.selectedAddress.city);
     this.registerForm.controls.address.setValue(this.selectedAddress.address);
     this.registerForm.controls.paymentMethod.enable();
-    this.registerForm.controls.money.enable();
-    
+    this.registerForm.controls.deposit.enable();
+    console.log(this.addressId.id);
+
   }
 
   createOrder(){
     this.showConfirmation = true;
+    let order = new Order();
+
+    order.clientId = this.client.id;
+    order.paymentMethodId = this.client.idPaymentMethod;
+    order.addressId = this.addressId.id;
+    order.discount = this.registerForm.controls.discount.value ?? 0;
+    order.totalPrice = this.registerForm.controls.total.value;
+    order.deposit = this.registerForm.controls.deposit.value;
+    order.paidOut = this.statePaid;
+    order.deposited = this.stateDeposit;
+
+    for (let i = 0; i < this.datosCard.length; i++) 
+    {
+      order.products.push(new ProductsOrder());
+      this.addressId.id;
+      order.products[i].id = this.datosCard[i].idProducto;
+      order.products[i].colorId = this.datosCard[i].color.id;
+      order.products[i].sizeId = this.datosCard[i].idTalla;
+      order.products[i].mainPrint = this.datosCard[i].estampado;
+      order.products[i].secundaryPrint = this.datosCard[i].estampadoSecundario;
+      order.products[i].observations = this.datosCard[i].observaciones;
+      order.products[i].quantity = this.datosCard[i].cantidad;
+
+    }
+
+    if(order.paidOut){     
+      order.deposit = order.totalPrice;
+    }
+
+    console.log(order.products);
+    this.serviceClient.createOrder(order).subscribe((resp : any)=>{
+
+    });
 
   }
   

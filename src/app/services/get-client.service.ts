@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Client } from '../models/client';
 import { Address } from '../models/address';
 import { Product } from '../models/product';
+import { Order } from '../models/order';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { Product } from '../models/product';
 export class GetClientService {
   
   _url = 'https://azban-buzos-api.azurewebsites.net/api/'
+  _url2 = 'https://demo1089139.mockable.io/product/getProductList/'
 
   constructor( private http: HttpClient )
   { 
@@ -26,7 +28,7 @@ export class GetClientService {
 
   getProductList(){
     let header = new HttpHeaders().set('Type-content', 'aplication/json');
-    let urlGetProduct = this._url + 'product/getProductList/' ;
+    let urlGetProduct = this._url2 ;
     
     return this.http.get(urlGetProduct, { headers: header });
   }
@@ -76,4 +78,8 @@ export class GetClientService {
     return this.http.post( postOrder, product);
   }
   
+  createOrder(order : Order){
+    let postCreateOrder = this._url + '/Order/CreateOrder';
+    return this.http.post(postCreateOrder, order )
+  }
 }

@@ -28,7 +28,7 @@ export class AddressFormComponent implements OnInit {
       addresse: new FormControl('', [Validators.required,Validators.maxLength(25), Validators.minLength(10)]),
       address: new FormControl('',[Validators.required, Validators.minLength(5)]),
       phoneAddresse:new FormControl('',[Validators.required,Validators.minLength(10), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-      money:new FormControl('',[Validators.required,Validators.minLength(4), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
+      deposit:new FormControl('',[Validators.required,Validators.minLength(4), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
       department:new FormControl('nv',[Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
       city: new FormControl('',[Validators.required, Validators.minLength(4)]),
     });
@@ -47,7 +47,7 @@ export class AddressFormComponent implements OnInit {
     this.address.addresse = this.addressData.controls.addresse.value; 
     this.address.addressePhone = this.addressData.controls.phoneAddresse.value; 
     this.address.address = this.addressData.controls.address.value;
-    this.address.departmentName = this.addressData.controls.department.value;
+    this.address.departmentId = this.addressData.controls.department.value;
     this.address.city = this.addressData.controls.city.value;
 
     this.addAddressEvent.emit(this.address)

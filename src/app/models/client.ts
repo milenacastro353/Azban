@@ -12,7 +12,7 @@ export class Client {
     idPaymentMethod: number;
     paid: boolean;
     initialPay: boolean;
-    money: number;
+    deposit: number;
     address: Array<Address>;
 
     constructor(){
@@ -27,7 +27,7 @@ export class Client {
         this.phone = '';
         this.idContactType = 0;
         this.contactValue = '';
-        this.money = 0;
+        this.deposit = 0;
         this.address = [];
     }
 

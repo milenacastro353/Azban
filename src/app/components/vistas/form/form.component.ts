@@ -30,6 +30,7 @@ export class FormComponent implements OnInit {
   showform1: boolean = false;
   showForm2: boolean = false;
   showConfirmation: boolean = false;
+  showErrorConfirmation: boolean = false;
   showButtonCreate: boolean = false;
   disableClientsField: boolean = false;
   disableEdit: boolean = true; 
@@ -54,7 +55,7 @@ export class FormComponent implements OnInit {
   stateDeposit: boolean = false;
 
   addressId = new Address();
-
+  confirmationMessage: string = '';
 
   registerForm = new FormGroup({
     
@@ -368,7 +369,7 @@ export class FormComponent implements OnInit {
         this.client.id = resp.response;
 
         this.serviceClient.addAddressToClient(address, this.client.id).subscribe((resp : any)=>{
-          address.id = resp.response.addresses.id;
+          address.id = resp.response;
           this.addressId.id = address.id
           console.log(this.client.id);    
         });
@@ -379,7 +380,10 @@ export class FormComponent implements OnInit {
         
       }); 
     }
-    console.log('prueba de id direccion' + this.addressId.id)
+    
+    this.productForm.controls.size.setValue('nv');
+    this.productForm.controls.product.setValue('nv');
+    this.productForm.controls.gender.setValue('nv');
   }
 
   editClient(){
@@ -416,7 +420,7 @@ export class FormComponent implements OnInit {
     console.log('direccion adicional' + this.customerAddress.addresse)
 
     this.serviceClient.addAddressToClient(this.customerAddress, this.client.id).subscribe((resp : any)=>{
-      this.customerAddress.id = resp.response;
+      this.addressId.id = resp.response;
 
       this.registerForm.controls.addresse.setValue(this.customerAddress.addresse);
       this.registerForm.controls.department.setValue(this.customerAddress.departmentId); 
@@ -534,13 +538,14 @@ export class FormComponent implements OnInit {
   }
 
   createOrder(){
-    this.showConfirmation = true;
+    
     let order = new Order();
+    let discountValue = this.registerForm.controls.discount.value;
 
     order.clientId = this.client.id;
     order.paymentMethodId = this.client.idPaymentMethod;
     order.addressId = this.addressId.id;
-    order.discount = this.registerForm.controls.discount.value ?? 0;
+    order.discount = (discountValue == null || discountValue == '' || discountValue.length > 1 ) ? 0 : discountValue;
     order.totalPrice = this.registerForm.controls.total.value;
     order.deposit = this.registerForm.controls.deposit.value;
     order.paidOut = this.statePaid;
@@ -566,7 +571,15 @@ export class FormComponent implements OnInit {
 
     console.log(order.products);
     this.serviceClient.createOrder(order).subscribe((resp : any)=>{
-
+      if (resp.code == 1 && resp.response != null && resp.response >= 0)
+      {
+        this.confirmationMessage = 'La orden a sido creado con el número: ' + resp.response;
+        this.showConfirmation = true;
+      }
+      else{
+        this.showErrorConfirmation = true;
+      }
+      
     });
 
   }

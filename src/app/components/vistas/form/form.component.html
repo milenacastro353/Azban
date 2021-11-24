@@ -24,11 +24,19 @@
 <!--Adición mensaje confirmación-->
 <div *ngIf="showConfirmation" id="background-pop-up-confirmation">
     <div id="container-pop-up-confirmation">
-        <app-modal-message>
+        <app-modal-message
+        [Message]="confirmationMessage">
         </app-modal-message>
     </div>
 </div>
 <!---->
+<div *ngIf="showErrorConfirmation" id="background-pop-up-confirmation">
+    <div id="container-pop-up-confirmation">
+        <app-modal-message
+        [Message]="'Ups! Ocurrió un error, verifica tu conexión e intenta nuevamente'">
+        </app-modal-message>
+    </div>
+</div>
 <div>
     <form [formGroup]="registerForm" id="form-order" class="form-floating">
         <div class="bg-header">
@@ -51,7 +59,7 @@
                         <div class="row">
                             <div class="col-lg-1 col-md-1 col-sm-12">
                                 <select   class="form-select" formControlName="documentType" id="documentType" >
-                                    <option value="nv" disabled>Tipo de documento</option>
+                                    <option value="nv" disabled>TD</option>
                                     <option  *ngFor="let documentId of documentList; index as i" value="{{documentId.id}}">{{documentId.abbreviation}}</option>
                                 </select>
                             </div>    

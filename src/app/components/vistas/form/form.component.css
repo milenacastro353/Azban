@@ -1,9 +1,12 @@
 #lineborder1{
   margin: 0;
   padding: 5px;
-  text-align: center;
   background-color: rgb(255, 255, 255);
   color:rgb(0, 0, 0);
+  font-size: 20px;
+}
+
+#initialText{
 }
 #hand-header{
   transform: rotate(180deg);
@@ -11,8 +14,7 @@
 }
 
 #return{
-  transform: rotate(180deg);
-  color: yellow;
+  color: #df0505;
   text-align: left;
 }
 
@@ -80,6 +82,10 @@ margin-top: 0 !important;
 
 .padding-right-0{
 padding-right: 0;
+}
+
+#observations{
+  color:white;
 }
 
 .obs-text{
@@ -204,10 +210,13 @@ max-height: 428px;
 .buttonColors{
   background-color: #F92438;
   color: #FFFFFF;
+  border:0px;
+  height: 38px;
 }
 .buttonColors:hover {
   background-color: #FF4F4F ;
   color: #FFFFFF;
+  border:0px;
 }
 
 .borderButtonColor{
@@ -252,6 +261,8 @@ input{
   color: white;
 }
 
+
+
 #bg-form-group{
   background-color: #2B2E34;
   color: white;
@@ -262,6 +273,11 @@ input{
 :disabled{
   background-color: #5a5b5c;
   color: white;
+}
+
+.input-group-append{
+  border:0px !important;
+
 }
 
 textarea{

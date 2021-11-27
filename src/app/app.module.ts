@@ -22,6 +22,7 @@ import { NgxPrintModule } from 'ngx-print';
 import { ToPrintComponent } from './components/shared/to-print/to-print.component';
 import { ChartsComponent } from './components/charts/charts.component';
 import { ChartsModule } from 'ng2-charts';
+import { InventoryComponent } from './components/inventory/inventory.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ChartsModule } from 'ng2-charts';
     OrderShipmentDataComponent,
     ConfirmationMessageComponent,
     ToPrintComponent,
-    ChartsComponent
+    ChartsComponent,
+    InventoryComponent
     
   ],
   imports: [

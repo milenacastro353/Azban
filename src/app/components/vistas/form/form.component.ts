@@ -263,6 +263,7 @@ export class FormComponent implements OnInit {
       this.client.idContactType = resp.response.idContactType; 
       this.client.contactValue = resp.response.contactValue;
       this.code = resp.code;
+      this.client.address = resp.response.adresses;
       
       console.log("el codigo es:" + this.code)
 
@@ -378,8 +379,16 @@ export class FormComponent implements OnInit {
       this.serviceClient.createOrUpdateClient(this.client).subscribe((resp : any)=>{
         
       }); 
+    } else if (this.code == 1 && this.client.address == null ){
+
+      this.serviceClient.addAddressToClient(address, this.client.id).subscribe((resp : any)=>{
+      address.id = resp.response.addresses.id;
+      this.addressId.id = address.id
+      console.log(this.client.id);    
+      });
     }
     console.log('prueba de id direccion' + this.addressId.id)
+    console.log('prueba direccion debe ser : ' + this.client.address)
   }
 
   editClient(){

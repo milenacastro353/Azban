@@ -18,10 +18,10 @@
 }
 
 .buttonColors{
-    background-color: #000000;
-    color: #FFFFFF;
+    background-color: #df0505;
+    color: white;
 }
 .buttonColors:hover {
-background-color: #FFAE36 ;
-color: #000000;
+    background-color: #FF4F4F  ;
+    color: white;
 }

@@ -10,6 +10,7 @@ import { OrderShipmentDataComponent } from './components/shared/order-shipment-d
 import { ConfirmationMessageComponent } from './components/shared/confirmation-message/confirmation-message.component';
 import { ToPrintComponent } from './components/shared/to-print/to-print.component';
 import { ChartsComponent } from './components/charts/charts.component';
+import { InventoryComponent } from './components/inventory/inventory.component'
 
 const routes: Routes = [
   { path: 'vista-pedidos', component: PedidosComponent },
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'order-shipment-data', component: OrderShipmentDataComponent},
   { path: 'confirmation-message', component: ConfirmationMessageComponent},
   { path: 'to-print', component: ToPrintComponent},
-  { path: 'charts', component: ChartsComponent}
+  { path: 'charts', component: ChartsComponent},
+  { path: 'inventory', component: InventoryComponent}
 ];
 
 @NgModule({

@@ -324,13 +324,13 @@ export class PedidosComponent implements OnInit {
     this.ejercicio7();
     this.ejercicio9();
     this.ejercicio10();*/
-    this.serviceClient.getOrders().subscribe((resp:any) => {
-      this.orderData = resp.orderData;
+    this.serviceClient.getOrdersInProcess().subscribe((resp:any) => {
+      this.orderData = resp.response;
       let payment : boolean 
 
       for (let i = 0; i < this.orderData.length; i++) {
         this.openView.push(false);    
-        payment = resp.orderData[i].payment;
+        payment = this.orderData[i].payed;
         this.showPaid.push(payment)
       } 
 

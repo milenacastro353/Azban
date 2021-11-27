@@ -121,17 +121,14 @@ export class FormComponent implements OnInit {
     });
 
     this.serviceClient.getProductList().subscribe((resp: any) => {
-      this.productList = resp.productList;
-      this.genderList = resp.genderList;
-      for (let i = 0; i < this.genderList.length; i++) {
+      this.productList = resp.response;
+      //this.genderList = resp.genderList;
+      /*for (let i = 0; i < this.genderList.length; i++) {
         let list = new Product
         list.idGenero = resp.genderList[i].genderId;  
         list.genero = resp.genderList[i].gender;
-      }
+      }*/
     });
-    
-
-  
   }
   
   onProductSelect(){
@@ -139,20 +136,25 @@ export class FormComponent implements OnInit {
     
     for (let index = 0; index < this.productList.length; index++)
     {
-      if (selectedId == this.productList[index].productId)
+      console.log("Ingresa a la lista id" + selectedId);
+      if (selectedId == this.productList[index].id)
       {
-        this.sizeList = this.productList[index].sizeList
+        console.log("Ingresa a la lista");
+        this.genderList = this.productList[index].genders;
+        this.sizeList = this.productList[index].sizes;
 
         // Instanciar el array colorList sin items
         this.colorList = new Array<Color>();
         // Recorrer el array colores del producto seleccionado
-        for (let i = 0; i < this.productList[index].colorList.length; i++) 
+        for (let i = 0; i < this.productList[index].colors.length; i++) 
         {
           // Por cada color se debe crear un objeto de tipo Color
           let newColor = new Color();
-          newColor.id = this.productList[index].colorList[i].colorId;
-          newColor.color = this.productList[index].colorList[i].colorName;
-          newColor.index = this.productList[index].colorList[i].index;
+          newColor.id = this.productList[index].colors[i].id;
+          newColor.color = this.productList[index].colors[i].color;
+          newColor.index = this.productList[index].colors[i].hexRef;
+
+          console.log('Id del color' + newColor.id)
             // Se debe hacer push de ese objecto color al array colorList
           this.colorList.push(newColor);
         }  
@@ -462,36 +464,36 @@ export class FormComponent implements OnInit {
 
     for (let index = 0; index < this.genderList.length; index++) 
     {
-      if (genderId == this.genderList[index].genderId) {
+      if (genderId == this.genderList[index].id) {
         product.genero = this.genderList[index].gender;
-        product.idGenero = this.genderList[index].genderId;
+        product.idGenero = this.genderList[index].id;
       }
     }
 
     for (let index = 0; index < this.productList.length; index++)
     {
-      if (productId == this.productList[index].productId) {
+      if (productId == this.productList[index].id) {
 
-        product.producto = this.productList[index].productName;
-        product.idProducto = this.productList[index].productId
+        product.producto = this.productList[index].name;
+        product.idProducto = this.productList[index].id
 
         let sizeId = this.productForm.controls.size.value;
 
-        for(let s = 0; s < this.productList[index].sizeList.length; s++){
+        for(let s = 0; s < this.productList[index].sizes.length; s++){
 
-          if (sizeId == this.productList[index].sizeList[s].sizeId) {
+          if (sizeId == this.productList[index].sizes[s].id) {
            
-            product.talla = this.productList[index].sizeList[s].sizeName;
-            product.idTalla = this.productList[index].sizeList[s].sizeId;
+            product.talla = this.productList[index].sizes[s].size;
+            product.idTalla = this.productList[index].sizes[s].id;
           }
         }
 
 
-        for(let c = 0; c < this.productList[index].colorList.length; c++){
-          if (this.colorSelectedId == this.productList[index].colorList[c].colorId){
-            product.color.color = this.productList[index].colorList[c].colorName;
-            product.color.id = this.productList[index].colorList[c].colorId;
-            product.color.index = this.productList[index].colorList[c].index;
+        for(let c = 0; c < this.productList[index].colors.length; c++){
+          if (this.colorSelectedId == this.productList[index].colors[c].id){
+            product.color.color = this.productList[index].colors[c].color;
+            product.color.id = this.productList[index].colors[c].id;
+            product.color.index = this.productList[index].colors[c].hexRef;
 
           }
         }
@@ -575,6 +577,7 @@ export class FormComponent implements OnInit {
       order.products[i].secundaryPrint = this.datosCard[i].estampadoSecundario;
       order.products[i].observations = this.datosCard[i].observaciones;
       order.products[i].quantity = this.datosCard[i].cantidad;
+      order.products[i].genderId = this.datosCard[i].idGenero;
 
     }
 

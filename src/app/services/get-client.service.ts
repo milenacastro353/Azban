@@ -11,7 +11,7 @@ import { Order } from '../models/order';
 export class GetClientService {
   
   _url = 'https://azban-buzos-api.azurewebsites.net/api/'
-  _url2 = 'https://demo1089139.mockable.io/product/getProductList/'
+  _url2 = 'https://demo1089139.mockable.io/'
 
   constructor( private http: HttpClient )
   { 
@@ -28,7 +28,7 @@ export class GetClientService {
 
   getProductList(){
     let header = new HttpHeaders().set('Type-content', 'aplication/json');
-    let urlGetProduct = this._url2 ;
+    let urlGetProduct = this._url + 'Product/GetProductList/' ;
     
     return this.http.get(urlGetProduct, { headers: header });
   }
@@ -41,7 +41,7 @@ export class GetClientService {
   }
   getOrderList(){
     let header = new HttpHeaders().set('Type-content', 'aplication/json');
-    let urlGetOrder = this._url + 'product/getProductList/' ;
+    let urlGetOrder = this._url + 'product/GetProductList/' ;
     
     return this.http.get(urlGetOrder, { headers: header });
   }
@@ -53,9 +53,9 @@ export class GetClientService {
     return this.http.get(urlGetState, { headers: header });
   }
 
-  getOrders(){
+  getOrdersInProcess(){
     let header = new HttpHeaders().set('Type-content', 'aplication/json');
-    let urlGetOrders = this._url + 'order/GetOrders/' ;
+    let urlGetOrders = this._url + 'Order/GetInProccessOrders/' ;
     
     
     return this.http.get(urlGetOrders, { headers: header });

@@ -202,19 +202,19 @@
                         <div class="col-lg-2 col-md-2 col-sm-12">
                             <select (change)="onProductSelect()" class="form-select" formControlName="product" id="product" >
                                 <option value="nv" disabled>Prenda</option>
-                                <option *ngFor="let product of productList; index as i" value="{{product.productId}}">{{product.productName}}</option>
+                                <option *ngFor="let product of productList; index as i" value="{{product.id}}">{{product.name}}</option>
                             </select>
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-12">
                             <select  class="form-select" formControlName="gender" id="gender" >
                                 <option value="nv" disabled>Género</option>
-                                <option *ngFor="let gender of genderList; index as i" value="{{gender.genderId}}">{{gender.gender}}</option>
+                                <option *ngFor="let gender of genderList; index as i" value="{{gender.id}}">{{gender.gender}}</option>
                             </select>
                         </div>
                         <div class="padding-0 col-lg-1 col-md-1 col-sm-12">
                             <select  class="form-select" formControlName="size" id="size" >
                                 <option value="nv" disabled>Talla</option>
-                                <option *ngFor="let size of sizeList; index as i" value="{{size.sizeId}}">{{size.sizeName}}</option>
+                                <option *ngFor="let size of sizeList; index as i" value="{{size.id}}">{{size.size}}</option>
                             </select>
                         </div>
                         <div class="not-margin-top col-lg-1 col-md-1 col-sm-12">

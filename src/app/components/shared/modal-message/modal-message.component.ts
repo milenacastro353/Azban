@@ -6,6 +6,9 @@ import { Component, OnInit, Output, Input, EventEmitter} from '@angular/core';
   styleUrls: ['./modal-message.component.css']
 })
 export class ModalMessageComponent implements OnInit {
+
+  @Input() Message : string = '';
+  
   @Output() ResetForm: EventEmitter <boolean> = new EventEmitter
   constructor() { }
 

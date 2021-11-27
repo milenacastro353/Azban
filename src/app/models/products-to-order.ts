@@ -8,6 +8,7 @@ export class ProductsOrder{
     quantity: number;
     price: number;
     priceVaration: number;
+    genderId: number;
 
     constructor(){
         this.id = 0;
@@ -19,5 +20,6 @@ export class ProductsOrder{
         this.quantity = 0;
         this.price = 0;
         this.priceVaration = 0;
+        this.genderId = 0
     }
 }

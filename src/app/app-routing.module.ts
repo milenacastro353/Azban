@@ -13,7 +13,7 @@ import { ChartsComponent } from './components/charts/charts.component';
 
 const routes: Routes = [
   { path: 'vista-pedidos', component: PedidosComponent },
-  { path: 'form', component: FormComponent },
+  { path: '', component: FormComponent },
   { path: 'address-form', component: AddressFormComponent},
   { path: 'product-info', component: ProductInfoComponent },
   { path: 'address-list', component: AddressListComponent},

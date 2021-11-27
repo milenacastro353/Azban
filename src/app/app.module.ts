@@ -23,6 +23,7 @@ import { ToPrintComponent } from './components/shared/to-print/to-print.componen
 import { ChartsComponent } from './components/charts/charts.component';
 import { ChartsModule } from 'ng2-charts';
 import { InventoryComponent } from './components/inventory/inventory.component';
+import { LoaderComponent } from './components/shared/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { InventoryComponent } from './components/inventory/inventory.component';
     ConfirmationMessageComponent,
     ToPrintComponent,
     ChartsComponent,
-    InventoryComponent
+    InventoryComponent,
+    LoaderComponent
     
   ],
   imports: [

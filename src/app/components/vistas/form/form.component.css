@@ -6,8 +6,7 @@
   font-size: 20px;
 }
 
-#initialText{
-}
+
 #hand-header{
   transform: rotate(180deg);
   color: yellow;
@@ -84,7 +83,7 @@ margin-top: 0 !important;
 padding-right: 0;
 }
 
-#observations{
+label{
   color:white;
 }
 
@@ -183,6 +182,24 @@ max-height: 428px;
 #container-pop-up-confirmation{
   position:absolute;
   width: 400px;
+}
+
+#background-pop-up-loader{
+  position: fixed;
+  background-color: rgba(128, 128, 128, 0.3);
+  z-index: 3;
+  height: 100%;
+  width: 100%;
+  display:flex;
+  justify-content: center;
+}
+
+#container-pop-up-loader{
+  position:absolute;
+  background-color: white;
+  margin-top: 40px;
+  border-radius: 30px;
+  max-height: 428px;
 }
 
 
@@ -284,3 +301,4 @@ textarea{
   background-color: #2B2E34;
   color: white;
 }
+

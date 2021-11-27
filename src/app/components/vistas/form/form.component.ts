@@ -14,6 +14,8 @@ import { ProductsOrder } from 'src/app/models/products-to-order';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
+  showLoader: boolean = false;
+  buttonCreateOrderDisable: boolean = false;
   clientWasEdited: boolean = false;
   showAddressForm: boolean = false;
   isClientSearched: boolean = false;
@@ -53,13 +55,14 @@ export class FormComponent implements OnInit {
   code: number = 0;
   statePaid: boolean = false;
   stateDeposit: boolean = false;
+  buttonPayDisabled: boolean = false;
 
   addressId = new Address();
   confirmationMessage: string = '';
 
   registerForm = new FormGroup({
     
-    name: new FormControl('', [Validators.required,Validators.maxLength(25), Validators.minLength(10)]),
+    name: new FormControl('', [Validators.required,Validators.maxLength(100), Validators.minLength(4)]),
     email: new FormControl('',Validators.email),
     documentType:new FormControl('nv',[Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
     document:new FormControl('',[ Validators.required,Validators.minLength(5), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
@@ -71,7 +74,7 @@ export class FormComponent implements OnInit {
     deposit:new FormControl('',[Validators.required,Validators.minLength(4), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
     department:new FormControl('nv',[Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
     paymentMethod: new FormControl('nv',[Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-    addresse: new FormControl('', [Validators.required,Validators.maxLength(25), Validators.minLength(10)]),
+    addresse: new FormControl('', [Validators.required,Validators.maxLength(100), Validators.minLength(4)]),
     phoneAddresse: new FormControl('',[Validators.required,Validators.minLength(7), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
     replyUserData: new FormControl(),
     total: new FormControl('',[Validators.required,Validators.minLength(4), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
@@ -238,6 +241,8 @@ export class FormComponent implements OnInit {
   disabledFields(){
     this.registerForm.controls.name.disable();
     this.registerForm.controls.phone.disable();
+    this.registerForm.controls.contactType.disable();
+    this.registerForm.controls.contactName.disable();
     this.registerForm.controls.email.disable();
     this.registerForm.controls.department.disable();
     this.registerForm.controls.city.disable();
@@ -246,7 +251,10 @@ export class FormComponent implements OnInit {
     this.registerForm.controls.deposit.disable();
     this.registerForm.controls.addresse.disable();
     this.registerForm.controls.phoneAddresse.disable();
+    this.registerForm.controls.discount.disable();
     this.registerForm.controls.total.disable();
+    this.registerForm.controls.replyUserData.disable();
+    this.buttonPayDisabled = true;
   }
 
 
@@ -288,8 +296,6 @@ export class FormComponent implements OnInit {
         }
       }
 
-
-      
       if (resp.code == 1 && resp.response.adresses != null) {
         this.showAddressList = true;
         this.registerForm.controls.name.setValue(this.client.name);
@@ -305,6 +311,9 @@ export class FormComponent implements OnInit {
         this.registerForm.controls.address.disable();
         this.registerForm.controls.contactType.disable();
         this.registerForm.controls.contactName.disable();
+        this.registerForm.controls.addresse.disable();
+        this.registerForm.controls.phoneAddresse.disable();
+        this.registerForm.controls.replyUserData.disable();
 
       } else if (resp.code == 1 && resp.response.adresses == null ) {
 
@@ -337,7 +346,7 @@ export class FormComponent implements OnInit {
     this.showForm2 = true;
     
     this.disabledFields()
-   // this.disableClientsField = true;
+
     this.isClientSelected = true;
     this.disableEdit = false;
 
@@ -390,15 +399,10 @@ export class FormComponent implements OnInit {
       console.log(this.client.id);    
       });
     }
-<<<<<<< HEAD
-    console.log('prueba de id direccion' + this.addressId.id)
-    console.log('prueba direccion debe ser : ' + this.client.address)
-=======
-    
+
     this.productForm.controls.size.setValue('nv');
     this.productForm.controls.product.setValue('nv');
     this.productForm.controls.gender.setValue('nv');
->>>>>>> 5076a6e546e730ba64218402f9d332a2a8643c5b
   }
 
   editClient(){
@@ -416,6 +420,10 @@ export class FormComponent implements OnInit {
     this.registerForm.controls.contactName.enable();
     this.registerForm.controls.addresse.enable();
     this.registerForm.controls.phoneAddresse.enable();
+    this.registerForm.controls.replyUserData.enable();
+    this.registerForm.controls.discount.enable();
+    this.registerForm.controls.total.enable();
+    this.buttonPayDisabled = false;
     this.disableEdit = true;
     this.isClientSelected= false;
 
@@ -458,10 +466,10 @@ export class FormComponent implements OnInit {
     product.estampadoSecundario = this.productForm.controls.secondaryStamp.value;
     product.observaciones = this.productForm.controls.observations.value;
     product.genero = this.productForm.controls.gender.value;
-
     let productId = this.productForm.controls.product.value;
     let genderId = this.productForm.controls.gender.value;
-
+    
+    this.buttonCreateOrderDisable = false;
     for (let index = 0; index < this.genderList.length; index++) 
     {
       if (genderId == this.genderList[index].id) {
@@ -523,8 +531,11 @@ export class FormComponent implements OnInit {
 
   deleteCard(i: number){
     this.datosCard.splice( i , 1)
-    if (i == 0) {
-    this.showButtonCreate = false;
+    if ( this.datosCard.length == 0 ) {
+    this.buttonCreateOrderDisable = true;
+    console.log(i)
+    } else if (this.datosCard.length < 0) {
+      this.buttonCreateOrderDisable = false;
     }
   }
 
@@ -565,6 +576,7 @@ export class FormComponent implements OnInit {
     order.deposit = this.registerForm.controls.deposit.value;
     order.paidOut = this.statePaid;
     order.deposited = this.stateDeposit;
+    this.showLoader = true;
 
     for (let i = 0; i < this.datosCard.length; i++) 
     {
@@ -586,7 +598,10 @@ export class FormComponent implements OnInit {
     }
 
     console.log(order.products);
-    this.serviceClient.createOrder(order).subscribe((resp : any)=>{
+    
+    //this.serviceClient.createOrder(order).subscribe((resp : any)=>{
+    this.serviceClient.createOrder(new Order()).subscribe((resp : any)=>{
+      this.showLoader = false;
       if (resp.code == 1 && resp.response != null && resp.response >= 0)
       {
         this.confirmationMessage = 'La orden a sido creado con el número: ' + resp.response;

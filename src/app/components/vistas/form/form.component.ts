@@ -599,8 +599,7 @@ export class FormComponent implements OnInit {
 
     console.log(order.products);
     
-    //this.serviceClient.createOrder(order).subscribe((resp : any)=>{
-    this.serviceClient.createOrder(new Order()).subscribe((resp : any)=>{
+    this.serviceClient.createOrder(order).subscribe((resp : any)=>{
       this.showLoader = false;
       if (resp.code == 1 && resp.response != null && resp.response >= 0)
       {

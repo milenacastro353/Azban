@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Empleados } from 'src/app/models/empleados';
+import { Order } from 'src/app/models/order';
+import { State } from 'src/app/models/state';
 import { Vendedor } from 'src/app/models/vendendor';
 import { GetClientService } from 'src/app/services/get-client.service';
 
@@ -29,6 +31,8 @@ export class PedidosComponent implements OnInit {
   differenceData : Array<number> = [];
   paymentSelectedIndex:number = -1;
   orderToPrint: Array<any> = [];
+  statesList: Array<any> = [];
+  orderId: number = 0;
   
   date = new Date();
 
@@ -324,8 +328,16 @@ export class PedidosComponent implements OnInit {
     this.ejercicio7();
     this.ejercicio9();
     this.ejercicio10();*/
+    this.serviceClient.getOrderStates().subscribe((resp:any) => {
+      this.statesList = resp.response
+      console.log("estado de lista " + this.statesList[5].stateId)
+    });
+
     this.serviceClient.getOrdersInProcess().subscribe((resp:any) => {
       this.orderData = resp.response;
+    
+      
+      console.log(this.orderData)
       let payment : boolean 
 
       for (let i = 0; i < this.orderData.length; i++) {
@@ -351,9 +363,10 @@ export class PedidosComponent implements OnInit {
         }
       }
     });
-    
+
     
   }
+
 
   collapseMenuPanel(){
     if(this.collapseTableClass == 'col-lg-11 col-md-11')
@@ -404,18 +417,24 @@ export class PedidosComponent implements OnInit {
   }
   payIcon(i: number){
     
-
     if(this.showPaid[i] == false){
       this.showConfirmation = true;
       this.paymentSelectedIndex = i
     }
   }
-  saveChangePay(i: number){
+  saveChangePay(){
     this.showConfirmation = false;
     this.showPaid[this.paymentSelectedIndex] = true;
-    console.log(this.showPaid[i])
+
+
+    this.orderId = this.orderData[this.paymentSelectedIndex].id;  
+
+    console.log('orden id' + this.orderId);
+    this.serviceClient.payOrder(this.orderId).subscribe(()=>{
+
+    });
   }
-  notSaveChangePay(i: number){
+  notSaveChangePay(){
     this.showConfirmation = false;
   }
   openPreview(){
@@ -428,6 +447,13 @@ export class PedidosComponent implements OnInit {
   orderPreview(print : any){
     this.orderToPrint = print
     console.log(this.orderToPrint)
+  }
+  changeState(value : HTMLSelectElement){
+   console.log('evento' + value.selectedIndex);
+
+ //   this.serviceClient.getChangeState(this.orderData[i].id, this.statesList[i].stateId ).subscribe((resp: any) =>{
+   //   console.log("prueba 2" + this.orderData[i].id, this.statesList[i].stateId);
+    //});
   }
 
 }

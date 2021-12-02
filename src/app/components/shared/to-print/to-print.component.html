@@ -33,12 +33,12 @@
                     </tr>
                     <tr>
                         <th>Nombre:</th>
-                        <td>{{data.customer}}</td>
+                        <td>{{data.client}}</td>
                     </tr>
-                    <tr>
+                    <!--<tr>
                         <th>Cédula:</th>
                         <td>{{data.documentInitial}} {{data.documentNumber}}</td>
-                    </tr>
+                    </tr>-->
                     <tr>
                         <th>Celular:</th>
                         <td>{{data.phone}}</td>
@@ -58,7 +58,12 @@
                         <th id="center" colspan="2">DESCRIPCIÓN PRODUCTO</th>
                     </tr>
                     <tr>
-                        <td id="space" colspan="2"></td>
+                        <td id="space" colspan="2">
+
+                            <ul>
+                                - <span *ngFor="let resumen of data.products; index as i" data-toggle="tooltip" data-placement="top" title="Tooltip on top">{{resumen.initials}} - {{resumen.mainPrint}}</span>
+                            </ul>
+                        </td>
                     </tr>
                 </tbody>
             </table>

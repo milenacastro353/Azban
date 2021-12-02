@@ -23,7 +23,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-3">
-                        <p>{{data.customer}}</p>
+                        <p>{{data.client}}</p>
                         <p>{{data.documentInitial}} {{data.documentNumber}}</p>
                         
                     </div>
@@ -36,7 +36,7 @@
                         <p>{{data.city}}</p>
                     </div>
                     <div id="summary" class="col-lg-2">
-                        <p *ngFor="let resumen of data.productList; index as i" data-toggle="tooltip" data-placement="top" title="Tooltip on top">{{resumen.summary}}</p>
+                        <p *ngFor="let resumen of data.products; index as i" data-toggle="tooltip" data-placement="top" title="Tooltip on top">{{resumen.initials}} - {{resumen.mainPrint}}</p>
                     </div>
                     <div id="check-to-print" class="col-lg-2" type="checkbox" >
                         <input class="form-check-input" type="checkbox"  id="checkboxNoLabel" (click)="oneCheck(i)" value="" [checked]="check" aria-label="...">

@@ -13,9 +13,13 @@ import { ChartsComponent } from './components/charts/charts.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { LoaderComponent } from './components/shared/loader/loader.component';
 
+//const domain : string = 'http://localhost:4200/';
+const domain : string = 'https://azban-buzos.azurewebsites.net/';
+
 const routes: Routes = [
   { path: 'vista-pedidos', component: PedidosComponent },
-  { path: '', component: FormComponent },
+  { path: '', component: PedidosComponent },
+  { path: 'crear-pedido', component: FormComponent },
   { path: 'address-form', component: AddressFormComponent},
   { path: 'product-info', component: ProductInfoComponent },
   { path: 'address-list', component: AddressListComponent},

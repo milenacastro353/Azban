@@ -3,8 +3,8 @@
   <div id="container-alert" *ngFor="let order of orderData; index as i">
     <app-confirmation-message
     [ConfirmationPay]="messageConfirmation"
-    (confirmChangeEvent)="saveChangePay(i)"
-    (confirmNotChangeEvent)="notSaveChangePay(i)"
+    (confirmChangeEvent)="saveChangePay()"
+    (confirmNotChangeEvent)="notSaveChangePay()"
     >
     </app-confirmation-message>
   </div>
@@ -98,12 +98,8 @@
                       <th class="col-lg-2 col-md-2 padding-0" ><small><label>{{order.creationDate.substring(0,10)}}</label></small></th>
                       <th class="col-lg-2 col-md-2 padding-0" ><small><label [ngClass]="classBgColor[i]" class="spaceColorState">{{order.deliveryDate.substring(0,10)}}</label></small></th>
                       <th class="col-lg-2 col-md-2 padding-0" >
-                        <select  name="Estado" id="stateProduction">
-                          <option value="1">Ingresado</option>
-                          <option value="2">Producción</option>
-                          <option value="3">Enviado</option>
-                          <option value="4">Devolución</option>
-                          <option value="5">Fijado</option>
+                        <select #estado  name="Estado" (change)="changeState(estado)"  id="stateProduction">
+                          <option *ngFor="let state of statesList; index as i" [ngValue]="state.stateId">{{state.state}}</option>
                         </select>
                       </th>
                       <th id="lookOrderPadding">

@@ -68,7 +68,7 @@
                             <div class="col-lg-1 col-md-1 col-sm-12">
                                 <select   class="form-select" formControlName="documentType" id="documentType" >
                                     <option value="nv" disabled>TD</option>
-                                    <option  *ngFor="let documentId of documentList; index as i" value="{{documentId.id}}">{{documentId.abbreviation}}</option>
+                                    <option  *ngFor="let document of documentList; index as i" value="{{document.id}}">{{document.abbreviation}}</option>
                                 </select>
                             </div>    
                             <div  class="col-lg-2 col-md-3 col-sm-12">

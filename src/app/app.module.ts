@@ -24,6 +24,7 @@ import { ChartsComponent } from './components/charts/charts.component';
 import { ChartsModule } from 'ng2-charts';
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { LoaderComponent } from './components/shared/loader/loader.component';
+import { PipeFilterOrdersPipe } from './pipes/pipe-filter-orders.pipe';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { LoaderComponent } from './components/shared/loader/loader.component';
     ToPrintComponent,
     ChartsComponent,
     InventoryComponent,
-    LoaderComponent
+    LoaderComponent,
+    PipeFilterOrdersPipe
     
   ],
   imports: [

@@ -107,7 +107,6 @@ select {
     border: solid 1px lightgray;
     border-radius: 5px;
     margin: 5px;
-    background-color: #2B2E34;
     color: white;
 }
 
@@ -131,16 +130,16 @@ padding-bottom: 10px;
 
 
 .color-red{
-    background-color: #FADBD8;
-    color:#E74C3C;
+    background-color: #E74C3C;
+    color:#FADBD8;
 }
 .color-yellow{
-    background-color: #FDEBD0 ;
-    color:#F39C12;
+    background-color:#F39C12;
+    color: #FDEBD0 ;
 }
 .color-green{
-    background-color: #D5F5E3;
-    color:#27AE60;
+    background-color:#27AE60;
+    color: #D5F5E3;
 
 }
 .spaceColorState{
@@ -176,4 +175,46 @@ option{
 
 .menu-tools{
     margin-top: 30px;
+}
+
+.back-green{
+    background-color: #579b59 ;
+}
+.back-blue{
+    background-color:#476797;
+}
+.back-dark{
+    background-color: #2B2E34;
+    border-color: lightgrey;
+}
+.back-white{
+    background-color: whitesmoke;
+}
+.btnForm{
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+}
+
+#buttonColorsFilter{
+    text-align: center;
+}
+
+#svg-shirt{
+    height: 16px;
+    width: 16px;
+}
+
+#input-search{
+    text-align: left;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    padding-left: 5%;
+    border-radius: 5px;
+    width: 100%;
+    height: 40px;
+}
+
+input:focus{
+    outline: none;
 }

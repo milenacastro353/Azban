@@ -48,7 +48,7 @@ export class GetClientService {
   
   getOrderStates(){
     let header = new HttpHeaders().set('Type-content', 'aplication/json');
-    let urlGetState = this._url2 + 'state/orderStates/' ;
+    let urlGetState = this._url + 'Order/GetStates/' ;
     
     return this.http.get(urlGetState, { headers: header });
   }
@@ -93,7 +93,7 @@ export class GetClientService {
   payOrder(orderId : number){
     
     let header = new HttpHeaders().set('Type-content', 'aplication/json');
-    let postPayOrder = this._url2 + 'api/Order/PayOrder/' + orderId;
+    let postPayOrder = this._url + '/Order/PayOrder/' + orderId;
     
     return this.http.get(postPayOrder, { headers: header });
   }

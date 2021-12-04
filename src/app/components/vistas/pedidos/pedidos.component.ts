@@ -33,7 +33,8 @@ export class PedidosComponent implements OnInit {
   orderToPrint: Array<any> = [];
   statesList: Array<any> = [];
   orderId: number = 0;
-  
+  stateId: number= 0;
+
   date = new Date();
 
   constructor(private GetClientService: GetClientService) { 
@@ -364,7 +365,6 @@ export class PedidosComponent implements OnInit {
       }
     });
 
-    
   }
 
 
@@ -448,12 +448,38 @@ export class PedidosComponent implements OnInit {
     this.orderToPrint = print
     console.log(this.orderToPrint)
   }
-  changeState(value : HTMLSelectElement){
-   console.log('evento' + value.selectedIndex);
+  changeState(index : number, orderId : number){
+    console.log()
+    let newStateId = this.statesList[index].stateId;
 
- //   this.serviceClient.getChangeState(this.orderData[i].id, this.statesList[i].stateId ).subscribe((resp: any) =>{
-   //   console.log("prueba 2" + this.orderData[i].id, this.statesList[i].stateId);
-    //});
+    this.serviceClient.getChangeState(orderId, newStateId).subscribe((resp: any) =>{
+      
+    });
+  }
+  filterByState(orderStateId : number){
+// Produccion = 2, Creados = 1, Listo PE = 3, Todos = 0
+    if (this.stateId == 0)
+    {
+      return true;
+    }
+    else if(this.stateId == 1 && this.stateId == orderStateId)
+    {
+      return true;
+    }
+    else  if(this.stateId == 2 && this.stateId == orderStateId)
+    {
+      return true;
+    }
+    else  if(this.stateId == 3 && this.stateId == orderStateId)
+    {
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+  setStateId(i: number){
+    this.stateId = i
   }
 
 }

@@ -75,15 +75,28 @@
           >
           </app-order-shipment-data> 
         </div>
+        <div class="row">
+          <div class="col-lg-4">
+            <input id="input-search" type="text" placeholder="Buscar">
+          </div>
+          <div id="buttonColorsFilter" class="col-lg-4">
+            <button type="button" (click)="setStateId(3)" class="btnForm back-green btn"></button>
+            <button type="button" (click)="setStateId(2)" class="btnForm back-blue  btn"></button>
+            <button type="button" (click)="setStateId(1)" class="btnForm back-dark  btn"></button>
+            <button type="button" (click)="setStateId(0)" class="btnForm back-white  btn"></button>
+          </div>
+          <div class="col-lg-4">
+          </div>
+        </div>
         <div *ngIf="showOrderData" class="col-lg-11 col-md-11"  class="card" id="card-complete">
           <div  class="panel-group" >
-            <div class="panel panel-default" id="borderState"  *ngFor="let order of orderData; index as i"  >
+            <div [style.display]="filterByState(order.stateId) ? '' : 'none'"  class="panel panel-default" [ngClass]="order.stateId==3 ? 'back-green' :  (order.stateId==2 ? 'back-blue' : 'back-dark')" id="borderState" *ngFor="let order of orderData; index as i " >
               <div> 
-                <table class="dataState" id="borderOrder">
+                <table class="dataState" id="borderOrder" *ngIf="filterByState(order.stateId)" >
                   <thead>
                     <tr >
                       <th class="col-lg-1 col-md-1 padding-0"><small>{{order.id}}</small></th>
-                      <th class="col-lg-3 col-md-3 padding-0"><small>{{order.client}}</small></th>
+                      <th class="col-lg-3 col-md-3 padding-0"><small>{{order.client}} ( {{order.contact}} )</small></th>
                       <th class="col-lg-3 col-md-3 padding-0"><small>$ {{order.deposit}}</small></th>
                       <th class="col-lg-1 col-md-2 padding-0">
                         <svg *ngIf="!showPaid[i]" (click)="payIcon(i)" id="notPaidIcon" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-coin" viewBox="0 0 16 16">
@@ -98,8 +111,8 @@
                       <th class="col-lg-2 col-md-2 padding-0" ><small><label>{{order.creationDate.substring(0,10)}}</label></small></th>
                       <th class="col-lg-2 col-md-2 padding-0" ><small><label [ngClass]="classBgColor[i]" class="spaceColorState">{{order.deliveryDate.substring(0,10)}}</label></small></th>
                       <th class="col-lg-2 col-md-2 padding-0" >
-                        <select #estado  name="Estado" (change)="changeState(estado)"  id="stateProduction">
-                          <option *ngFor="let state of statesList; index as i" [ngValue]="state.stateId">{{state.state}}</option>
+                        <select #estado  name="Estado" (change)="changeState(estado.selectedIndex, order.id)"  id="stateProduction">
+                          <option *ngFor="let state of statesList; index as i" value="{{state.stateId}}" [selected]="state.stateId == order.stateId">{{state.state}}</option>
                         </select>
                       </th>
                       <th id="lookOrderPadding">
@@ -130,6 +143,20 @@
                       <td><small class="col-md-1"><span class="textStrong">&#8226; Est: </span>{{data.mainPrint}}</small></td>
                       <td><small class="col-md-1"><span class="textStrong">&#8226; Est 2: </span>{{data.secundaryPrint}}</small></td>
                       <td><small class="col-md-1"><span class="textStrong">&#8226; Obs: </span>{{order.anotation}}</small></td>
+                      <td>
+                        <div class="form-check form-switch">
+                          <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                          <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                          <img id="svg-shirt" src="../../../../assets/img/ryanlerch_white_t-shirt.svg" alt="">
+                         </div>
+                        <div class="form-check form-switch">
+                          <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                          <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-layers-half" viewBox="0 0 16 16">
+                            <path d="M8.235 1.559a.5.5 0 0 0-.47 0l-7.5 4a.5.5 0 0 0 0 .882L3.188 8 .264 9.559a.5.5 0 0 0 0 .882l7.5 4a.5.5 0 0 0 .47 0l7.5-4a.5.5 0 0 0 0-.882L12.813 8l2.922-1.559a.5.5 0 0 0 0-.882l-7.5-4zM8 9.433 1.562 6 8 2.567 14.438 6 8 9.433z"/>
+                          </svg>
+                         </div>
+                      </td>
                   </tr>
                 </tbody>
               </table>

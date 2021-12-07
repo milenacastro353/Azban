@@ -218,3 +218,8 @@ option{
 input:focus{
     outline: none;
 }
+
+#aling-checks{
+    text-align: right;
+    width: 10px;
+}

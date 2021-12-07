@@ -4,7 +4,7 @@ import { Order } from 'src/app/models/order';
 import { State } from 'src/app/models/state';
 import { Vendedor } from 'src/app/models/vendendor';
 import { GetClientService } from 'src/app/services/get-client.service';
-
+import { PipeFilterOrdersPipe } from 'src/app/pipes/pipe-filter-orders.pipe';
 @Component({
   selector: 'app-pedidos',
   templateUrl: './pedidos.component.html',
@@ -33,8 +33,10 @@ export class PedidosComponent implements OnInit {
   orderToPrint: Array<any> = [];
   statesList: Array<any> = [];
   orderId: number = 0;
-  stateId: number= 0;
-
+  stateId: number = 0;
+  filterByWords: string  ='';
+  stateCheckClothes : boolean = false; 
+  stateCheckStamp: boolean = false;
   date = new Date();
 
   constructor(private GetClientService: GetClientService) { 
@@ -481,6 +483,30 @@ export class PedidosComponent implements OnInit {
   setStateId(i: number){
     this.stateId = i
   }
+  checkClothes(){
+    if(this.stateCheckClothes == true){
+      console.log('false')
+      this.stateCheckClothes = false;
+    } else{
+      console.log('true')
+      this.stateCheckClothes = true;
+    }
+    this.serviceClient.checkProductExist(1 , this.stateCheckClothes).subscribe((resp:any)=>{
 
+    });
+  }
+
+  checkStamp(){
+    if (this.stateCheckStamp == true) { 
+      console.log('false')
+      this.stateCheckStamp = false;
+    } else {
+      console.log('true')
+      this.stateCheckStamp = true;
+    }
+    this.serviceClient.checkstampInProduction(1, this.stateCheckStamp).subscribe((resp:any)=>{
+
+    });
+  }
 }
   

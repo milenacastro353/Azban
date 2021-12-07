@@ -39,12 +39,6 @@ export class GetClientService {
     
     return this.http.get(urlGetLists, { headers: header });
   }
-  getOrderList(){
-    let header = new HttpHeaders().set('Type-content', 'aplication/json');
-    let urlGetOrder = this._url + 'product/GetProductList/' ;
-    
-    return this.http.get(urlGetOrder, { headers: header });
-  }
   
   getOrderStates(){
     let header = new HttpHeaders().set('Type-content', 'aplication/json');
@@ -86,15 +80,27 @@ export class GetClientService {
   }
   
   createOrder(order : Order){
-    let postCreateOrder = this._url + '/Order/CreateOrder';
+    let postCreateOrder = this._url + 'Order/CreateOrder';
     return this.http.post(postCreateOrder, order )
   }
 
   payOrder(orderId : number){
     
     let header = new HttpHeaders().set('Type-content', 'aplication/json');
-    let postPayOrder = this._url + '/Order/PayOrder/' + orderId;
+    let postPayOrder = this._url + 'Order/PayOrder/' + orderId;
     
     return this.http.get(postPayOrder, { headers: header });
+  }
+
+  checkProductExist(idDetallePedido: number, check1: boolean) {
+    let header = new HttpHeaders().set('Type-content', 'aplication/json');
+    let getCheckProduct = this._url + 'Order/MarkProductExist/' + idDetallePedido + '/' + check1;
+    return this.http.get(getCheckProduct, { headers: header });
+  }
+
+  checkstampInProduction(idDetallePedido: number, check2: boolean ){
+    let header = new HttpHeaders().set('Type-content', 'aplication/json');
+    let getCheckStamp = this._url + 'Order/StampInProduction/' + idDetallePedido + '/' + check2;
+    return this.http.get(getCheckStamp, { headers: header });
   }
 }

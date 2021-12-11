@@ -38,6 +38,12 @@ export class PedidosComponent implements OnInit {
   stateCheckClothes : boolean = false; 
   stateCheckStamp: boolean = false;
   date = new Date();
+  proccessStampList = [
+    { id: 1, proccess: 'Faltante', colorHexRef: '#FFFFFF'},
+    { id: 2, proccess: 'Diseñado', colorHexRef: '#FF2828'},
+    { id: 3, proccess: 'En espera entrega', colorHexRef: '#FFFFFF'},
+    { id: 4, proccess: 'Listo', colorHexRef: '#FFFFFF'}
+  ];
 
   constructor(private GetClientService: GetClientService) { 
     this.serviceClient = GetClientService;
@@ -450,14 +456,38 @@ export class PedidosComponent implements OnInit {
     this.orderToPrint = print
     console.log(this.orderToPrint)
   }
+
   changeState(index : number, orderId : number){
-    console.log()
     let newStateId = this.statesList[index].stateId;
 
     this.serviceClient.getChangeState(orderId, newStateId).subscribe((resp: any) =>{
       
     });
   }
+
+  GetColorStampState(idStampState : number)
+  {
+    for(let i = 0; i < this.proccessStampList.length; i++)
+    {
+      if (idStampState == this.proccessStampList[i].id)
+      {
+        return this.proccessStampList[i].colorHexRef;
+      }
+    }
+
+    return '#FFFFFF';
+  }
+
+  changeStampState(field : HTMLSelectElement, productId : number){
+    
+    field.style.backgroundColor = this.proccessStampList[field.selectedIndex].colorHexRef;
+    //let newStateId = this.statesList[index].stateId;
+
+    //this.serviceClient.getChangeState(orderId, newStateId).subscribe((resp: any) =>{
+      
+    //});
+  }
+
   filterByState(orderStateId : number){
 // Produccion = 2, Creados = 1, Listo PE = 3, Todos = 0
     if (this.stateId == 0)
@@ -483,7 +513,8 @@ export class PedidosComponent implements OnInit {
   setStateId(i: number){
     this.stateId = i
   }
-  checkClothes(){
+
+  checkClothes(idProduct : number){
     if(this.stateCheckClothes == true){
       console.log('false')
       this.stateCheckClothes = false;

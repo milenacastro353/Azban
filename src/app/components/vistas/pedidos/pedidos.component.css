@@ -222,4 +222,25 @@ input:focus{
 #aling-checks{
     text-align: right;
     width: 10px;
+    text-align: left;
+}
+
+#check-clothes{
+    display: inline-flex;
+}
+
+#check-stamp{
+    display: inline-flex;
+}
+
+#state-stamp-production{
+    max-width: 100px
+}
+
+.margin-top-5{
+    margin-top: 4px;
+}
+
+.icon-container{
+    display: inline-flex;
 }

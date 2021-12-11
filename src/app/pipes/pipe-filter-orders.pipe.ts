@@ -11,13 +11,14 @@ export class PipeFilterOrdersPipe implements PipeTransform {
       if (result.client.toLowerCase().indexOf(arg.toLowerCase()) > -1 ) {
         resultSearch.push(result);
       }
-
-      for(let i = 0; i < result.products.length; i++)
-      {
-        if (result.products[i].mainPrint.toLowerCase().indexOf(arg.toLowerCase()) > -1 )
+      else{
+        for(let i = 0; i < result.products.length; i++)
         {
-          resultSearch.push(result);
-          break;
+          if (result.products[i].mainPrint.toLowerCase().indexOf(arg.toLowerCase()) > -1 )
+          {
+            resultSearch.push(result);
+            break;
+          }
         }
       }
     }

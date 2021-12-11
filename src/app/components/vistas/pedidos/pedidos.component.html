@@ -136,23 +136,27 @@
                 <tbody>
                   <tr *ngFor="let data of order.products">
                       <td><small class="col-md-1"><span class="textStrong"> &#8226; Prod: </span>{{data.product}}</small></td>
-                      <td><small class="col-md-1"><span class="textStrong">&#8226; Genero: </span>{{data.gender}}</small></td>
-                      <td><small class="col-md-1"><span class="textStrong">&#8226; Talla: </span>{{data.size}}</small></td>
+                      <td><small class="col-md-1"><span class="textStrong">&#8226; Talla: </span>{{data.size}} - {{data.gender}}</small></td>
                       <td><small class="col-md-1"><span class="textStrong">&#8226; Color: </span>{{data.color}}</small></td>
                       <td><small class="col-md-1"><span class="textStrong">&#8226; Cant: </span>{{data.quantity}}</small></td>
                       <td><small class="col-md-1"><span class="textStrong">&#8226; Est: </span>{{data.mainPrint}}</small></td>
                       <td><small class="col-md-1"><span class="textStrong">&#8226; Est 2: </span>{{data.secundaryPrint}}</small></td>
                       <td><small class="col-md-1"><span class="textStrong">&#8226; Obs: </span>{{order.anotation}}</small></td>
                       <td id="aling-checks">
-                        <div class="form-check form-switch" id="check-clothes">
-                          <input class="form-check-input" type="checkbox" id="switchClothes" (click)="checkClothes()">
+                        <div class="icon-container">
                           <img id="svg-shirt" src="../../../../assets/img/ryanlerch_white_t-shirt.svg" alt="">
+                        </div>
+                        <div class="form-check form-switch" id="check-clothes">
+                          <input class="form-check-input" type="checkbox" [checked]="data.readyProductBase" id="switchClothes" (click)="checkClothes(data.id)">
                          </div>
-                        <div class="form-check form-switch" id="check-stamp">
-                          <input class="form-check-input" type="checkbox" id="switchStamp" (click)="checkStamp()">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-layers-half" viewBox="0 0 16 16">
+                        <div class="" id="check-stamp">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="margin-top-4 bi bi-layers-half" viewBox="0 0 16 16">
                             <path d="M8.235 1.559a.5.5 0 0 0-.47 0l-7.5 4a.5.5 0 0 0 0 .882L3.188 8 .264 9.559a.5.5 0 0 0 0 .882l7.5 4a.5.5 0 0 0 .47 0l7.5-4a.5.5 0 0 0 0-.882L12.813 8l2.922-1.559a.5.5 0 0 0 0-.882l-7.5-4zM8 9.433 1.562 6 8 2.567 14.438 6 8 9.433z"/>
                           </svg>
+                          <select #estadoEstampado name="Estado" [style.background-color]="GetColorStampState(data.proccessStampId)" (change)="changeStampState(estadoEstampado, data.id)"  id="state-stamp-production">
+                            <option *ngFor="let proccess of proccessStampList; index as i" value="{{proccess.id}}" [selected]="proccess.id == data.proccessStampId">{{proccess.proccess}}</option>
+                          </select>
+                          <!--<input class="form-check-input" type="checkbox" id="switchStamp" (click)="checkStamp()">-->
                          </div>
                       </td>
                   </tr>
